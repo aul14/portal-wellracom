@@ -60,6 +60,10 @@ const Users = db.define('users', {
         type: DataTypes.DATEONLY,
         allowNull: true
     },
+    telegram_id: {
+        type: DataTypes.STRING,
+        allowNull: true
+    },
     roleId: {
         type: DataTypes.INTEGER,
         allowNull: false,

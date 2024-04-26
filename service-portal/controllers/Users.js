@@ -57,7 +57,7 @@ export const getUsersQuery = async (req, res) => {
 export const getUsers = async (req, res) => {
     try {
         const response = await User.findAll({
-            attributes: ['id', 'name', 'username', 'email', 'avatar', 'date_start', 'date_end', 'createdAt', 'updatedAt'],
+            attributes: ['id', 'name', 'username', 'email', 'avatar', 'date_start', 'date_end', 'telegram_id', 'createdAt', 'updatedAt'],
             include: [{
                 model: Role,
                 attributes: ['id', 'name', 'description']
@@ -78,7 +78,7 @@ export const getUsers = async (req, res) => {
 export const getUserById = async (req, res) => {
     try {
         const user = await User.findOne({
-            attributes: ['id', 'name', 'username', 'email', 'avatar', 'date_start', 'date_end', 'createdAt', 'updatedAt'],
+            attributes: ['id', 'name', 'username', 'email', 'avatar', 'date_start', 'date_end', 'telegram_id', 'createdAt', 'updatedAt'],
             where: {
                 id: req.params.id
             },
@@ -116,6 +116,7 @@ export const createUser = async (req, res) => {
             roleId: 'any|empty:false',
             dateStart: 'date|optional',
             dateEnd: 'date|optional',
+            telegramId: 'any|optional',
         }
 
         const validate = v.validate(req.body, schema);
@@ -127,7 +128,7 @@ export const createUser = async (req, res) => {
             })
         }
 
-        const { name, username, email, password, confPassword, roleId, dateStart, dateEnd } = req.body;
+        const { name, username, email, password, confPassword, roleId, dateStart, dateEnd, telegramId } = req.body;
 
         if (password !== confPassword) {
             return res.status(400).json({
@@ -211,6 +212,7 @@ export const createUser = async (req, res) => {
             roleId: roleId,
             date_start: dateStart,
             date_end: dateEnd,
+            telegram_id: telegramId,
             avatar: fileName,
             url_avatar: url,
         });
@@ -238,6 +240,7 @@ export const updateUser = async (req, res) => {
             roleId: 'any|optional',
             dateStart: 'date|optional',
             dateEnd: 'date|optional',
+            telegramId: 'any|optional',
         }
 
         const validate = v.validate(req.body, schema);
@@ -262,7 +265,7 @@ export const updateUser = async (req, res) => {
             })
         }
 
-        const { name, username, email, password, confPassword, roleId, dateStart, dateEnd } = req.body;
+        const { name, username, email, password, confPassword, roleId, dateStart, dateEnd, telegramId } = req.body;
 
         let hashPassword;
         if (password === "" || password == null) {
@@ -362,6 +365,7 @@ export const updateUser = async (req, res) => {
             roleId: roleId,
             date_start: dateStart,
             date_end: dateEnd,
+            telegram_id: telegramId,
             avatar: fileName,
             url_avatar: url,
         });

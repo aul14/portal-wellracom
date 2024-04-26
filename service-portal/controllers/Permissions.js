@@ -1,6 +1,5 @@
 import Permission from '../models/PermissionModel.js';
 import Module from '../models/ModuleModel.js';
-import PermissionRole from '../models/PermissionRoleModel.js';
 import { checkUniqueness } from '../helpers/checkUnique.js'
 import { Op } from 'sequelize'
 import Validator from 'fastest-validator';
