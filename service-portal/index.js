@@ -9,6 +9,7 @@ import ModuleRoute from './routes/ModuleRoute.js';
 import RefreshToken from './routes/RefreshTokenRoute.js';
 import RoleRoute from './routes/RoleRoute.js';
 import PermissionRoute from './routes/PermissionRoute.js';
+import PermissionRoleRoute from './routes/PermissionRoleRoute.js';
 dotenv.config()
 
 const app = express();
@@ -28,6 +29,7 @@ app.use(ModuleRoute);
 app.use(PermissionRoute);
 app.use(RefreshToken);
 app.use(AuthRoute);
+app.use(PermissionRoleRoute);
 
 
 // Uncoment perintah dibawah untuk langsung auto migrate, setelah itu coment lagi.
