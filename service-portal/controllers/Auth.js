@@ -1,4 +1,6 @@
 import User from '../models/UserModel.js';
+import Role from '../models/RoleModel.js';
+import Permission from '../models/PermissionModel.js';
 import RefreshToken from '../models/RefreshTokenModel.js';
 import argon2 from 'argon2';
 import Validator from 'fastest-validator';
@@ -24,6 +26,16 @@ export const Login = async (req, res) => {
             where: {
                 username: req.body.username
             },
+            include: [{
+                model: Role,
+                attributes: ['id', 'name', 'description'],
+                include: [
+                    {
+                        model: Permission,
+                        attributes: ['id', 'keyName', 'name'] // Include the Permission model with desired attributes
+                    }
+                ]
+            }]
         });
 
 
@@ -47,7 +59,8 @@ export const Login = async (req, res) => {
             name: user.name,
             username: user.username,
             email: user.email,
-            urlAvatar: user.url_avatar
+            urlAvatar: user.url_avatar,
+            role: user.role
         }
 
         res.json({
