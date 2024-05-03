@@ -88,27 +88,25 @@ export const create = async (req, res) => {
         // Create FormData object to handle multipart/form-data
         const formData = new FormData();
 
-        // Append user data fields to FormData
-        formData.append('name', req.body.name);
-        formData.append('username', req.body.username);
-        formData.append('email', req.body.email);
-        formData.append('password', req.body.password);
-        formData.append('confPassword', req.body.confPassword);
-        formData.append('roleId', req.body.roleId);
-        if (req.body.dateStart) {
-            const dateStart = new Date(req.body.dateStart);
-            if (!isNaN(dateStart)) {
-                formData.append('dateStart', dateStart.toISOString());
-            } else {
-                console.error('Invalid date format for dateStart:', req.body.dateStart);
+        // Define the keys you want to include conditionally
+        const keysToAppend = [
+            'name',
+            'username',
+            'email',
+            'password',
+            'confPassword',
+            'roleId',
+            'dateStart',
+            'dateEnd',
+            'telegramId'
+        ];
+
+        // Loop through keysToAppend array and append to formData if corresponding property exists in req.body
+        keysToAppend.forEach(key => {
+            if (req.body[key]) {
+                formData.append(key, req.body[key]);
             }
-        }
-        if (req.body.dateEnd) {
-            formData.append('dateEnd', new Date(req.body.dateEnd).toISOString());
-        }
-        if (req.body.telegramId) {
-            formData.append('telegramId', req.body.telegramId);
-        }
+        });
 
         // Append avatar file if available
         if (req.files && req.files.file) {
@@ -121,7 +119,6 @@ export const create = async (req, res) => {
                 formData.append('file', file.data, file.name);
             }
         }
-
 
         const user = await api.post(`/users`, formData, {
             headers: {
@@ -152,7 +149,49 @@ export const create = async (req, res) => {
 }
 export const update = async (req, res) => {
     try {
+        // Create FormData object to handle multipart/form-data
+        const formData = new FormData();
 
+        // Define the keys you want to include conditionally
+        const keysToAppend = [
+            'name',
+            'username',
+            'email',
+            'password',
+            'confPassword',
+            'roleId',
+            'dateStart',
+            'dateEnd',
+            'telegramId'
+        ];
+
+        // Loop through keysToAppend array and append to formData if corresponding property exists in req.body
+        keysToAppend.forEach(key => {
+            if (req.body[key]) {
+                formData.append(key, req.body[key]);
+            }
+        });
+
+        // Append avatar file if available
+        if (req.files && req.files.file) {
+            const file = req.files.file;
+
+            if (file.data instanceof Buffer) {
+                const blob = new Blob([file.data], { type: file.mimetype });
+                formData.append('file', blob, file.name);
+            } else {
+                formData.append('file', file.data, file.name);
+            }
+        }
+
+        const { id } = req.params;
+
+        const user = await api.put(`/users/${id}`, formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        });
+        res.json(user.data)
     } catch (error) {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
@@ -176,7 +215,9 @@ export const update = async (req, res) => {
 }
 export const destroy = async (req, res) => {
     try {
-
+        const { id } = req.params;
+        const user = await api.delete(`/users/${id}`);
+        res.json(user.data);
     } catch (error) {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
