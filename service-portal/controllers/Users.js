@@ -114,8 +114,8 @@ export const createUser = async (req, res) => {
             email: 'email|empty:false',
             password: 'string|empty:false|min:6',
             roleId: 'any|empty:false',
-            dateStart: 'date|optional',
-            dateEnd: 'date|optional',
+            dateStart: 'string|optional',
+            dateEnd: 'string|optional',
             telegramId: 'any|optional',
         }
 
@@ -220,7 +220,17 @@ export const createUser = async (req, res) => {
         res.status(201).json({
             status: 'success',
             msg: 'User created',
-            data: user
+            data: {
+                username: user.username,
+                name: user.name,
+                email: user.email,
+                roleId: user.roleId,
+                date_start: user.date_start,
+                date_end: user.date_end,
+                telegram_id: user.telegram_id,
+                avatar: user.avatar,
+                url_avatar: user.url_avatar,
+            }
         });
 
     } catch (error) {
@@ -238,8 +248,8 @@ export const updateUser = async (req, res) => {
             email: 'email|optional',
             password: 'string|optional|min:6',
             roleId: 'any|optional',
-            dateStart: 'date|optional',
-            dateEnd: 'date|optional',
+            dateStart: 'string|optional',
+            dateEnd: 'string|optional',
             telegramId: 'any|optional',
         }
 
@@ -373,7 +383,17 @@ export const updateUser = async (req, res) => {
         res.status(200).json({
             status: 'success',
             msg: 'User updated',
-            data: response_user
+            data: {
+                username: response_user.username,
+                name: response_user.name,
+                email: response_user.email,
+                roleId: response_user.roleId,
+                date_start: response_user.date_start,
+                date_end: response_user.date_end,
+                telegram_id: response_user.telegram_id,
+                avatar: response_user.avatar,
+                url_avatar: response_user.url_avatar,
+            }
         })
 
     } catch (error) {

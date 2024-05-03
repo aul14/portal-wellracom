@@ -19,7 +19,8 @@ app.use(cors({
     origin: ['http://localhost:5000']
 }))
 
-app.use(express.json());
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: false, limit: '50mb' }));
 app.use(FileUpload());
 app.use(express.static("public"));
 
