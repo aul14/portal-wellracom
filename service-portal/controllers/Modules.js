@@ -13,7 +13,7 @@ export const getModulesQuery = async (req, res) => {
             ]
         } : {};
 
-        const sortOrder = order[0].dir === 'asc' ? 'ASC' : 'DESC';
+        const sortOrder = order === 'asc' ? 'ASC' : 'DESC';
 
         const moduleData = await Module.findAndCountAll({
             where: searchData,

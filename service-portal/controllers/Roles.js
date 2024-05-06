@@ -15,7 +15,7 @@ export const getRolesQuery = async (req, res) => {
             ]
         } : {};
 
-        const sortOrder = order[0].dir === 'asc' ? 'ASC' : 'DESC';
+        const sortOrder = order === 'asc' ? 'ASC' : 'DESC';
 
         const roleData = await Role.findAndCountAll({
             where: searchData,
