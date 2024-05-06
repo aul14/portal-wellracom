@@ -9,12 +9,13 @@ import usersRoute from './routes/users.js';
 import rolesRoute from './routes/roles.js';
 import modulesRoute from './routes/modules.js';
 import permissionsRoute from './routes/permissions.js';
+import permissionsRolesRoute from './routes/permissionsRoles.js';
 
 const app = express();
 
 app.use(cors({
     credentials: true,
-    origin: ['http://localhost:3000']
+    origin: [`http://localhost:${process.env.APP_PORT}`]
 }))
 
 app.use(FileUpload());
@@ -27,6 +28,7 @@ app.use('/users', usersRoute);
 app.use('/roles', rolesRoute);
 app.use('/modules', modulesRoute);
 app.use('/permissions', permissionsRoute);
+app.use('/access_control', permissionsRolesRoute);
 
 app.listen(process.env.APP_PORT, () => {
     console.log(`Server up and running...`);

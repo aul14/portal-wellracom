@@ -16,7 +16,7 @@ const app = express();
 
 app.use(cors({
     credentials: true,
-    origin: ['http://localhost:5000']
+    origin: [`http://localhost:${process.env.APP_PORT}`]
 }))
 
 app.use(express.json({ limit: '50mb' }));
