@@ -8,6 +8,7 @@ dotenv.config();
 import usersRoute from './routes/users.js';
 import rolesRoute from './routes/roles.js';
 import modulesRoute from './routes/modules.js';
+import permissionsRoute from './routes/permissions.js';
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(express.static("public"));
 app.use('/users', usersRoute);
 app.use('/roles', rolesRoute);
 app.use('/modules', modulesRoute);
+app.use('/permissions', permissionsRoute);
 
 app.listen(process.env.APP_PORT, () => {
     console.log(`Server up and running...`);
