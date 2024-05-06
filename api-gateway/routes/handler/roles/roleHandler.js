@@ -10,8 +10,8 @@ const api = apiAdapter(URL_SERVICE_PORTAL);
 
 export const getAll = async (req, res) => {
     try {
-        const users = await api.get(`/roles`);
-        res.json(users.data);
+        const roles = await api.get(`/roles`);
+        res.json(roles.data);
     } catch (error) {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
@@ -35,12 +35,12 @@ export const getAll = async (req, res) => {
 }
 export const getQuery = async (req, res) => {
     try {
-        const users = await api.get(`/roles/query`, {
+        const roles = await api.get(`/roles/query`, {
             params: {
                 ...req.query
             }
         });
-        res.json(users.data);
+        res.json(roles.data);
     } catch (error) {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
@@ -65,8 +65,8 @@ export const getQuery = async (req, res) => {
 export const get = async (req, res) => {
     try {
         const { id } = req.params;
-        const user = await api.get(`/roles/${id}`);
-        res.json(user.data);
+        const role = await api.get(`/roles/${id}`);
+        res.json(role.data);
     } catch (error) {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
@@ -90,8 +90,8 @@ export const get = async (req, res) => {
 }
 export const create = async (req, res) => {
     try {
-        const user = await api.post(`/roles`, req.body);
-        res.json(user.data);
+        const role = await api.post(`/roles`, req.body);
+        res.json(role.data);
     } catch (error) {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
@@ -116,8 +116,8 @@ export const create = async (req, res) => {
 export const update = async (req, res) => {
     try {
         const { id } = req.params;
-        const users = await api.put(`/roles/${id}`, req.body);
-        res.json(users.data);
+        const role = await api.put(`/roles/${id}`, req.body);
+        res.json(role.data);
     } catch (error) {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
@@ -142,8 +142,8 @@ export const update = async (req, res) => {
 export const destroy = async (req, res) => {
     try {
         const { id } = req.params;
-        const users = await api.delete(`/roles/${id}`);
-        res.json(users.data);
+        const role = await api.delete(`/roles/${id}`);
+        res.json(role.data);
     } catch (error) {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
