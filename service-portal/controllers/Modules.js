@@ -1,5 +1,6 @@
 import Module from '../models/ModuleModel.js';
 import Validator from 'fastest-validator';
+import { checkUniqueness } from '../helpers/checkUnique.js';
 import { Op } from 'sequelize'
 const v = new Validator();
 
@@ -97,6 +98,13 @@ export const createModule = async (req, res) => {
 
         const { name } = req.body;
 
+        if (await checkUniqueness(Module, 'name', name)) {
+            return res.status(400).json({
+                status: 'error',
+                msg: 'Module name is already exist'
+            });
+        }
+
         const module = await Module.create({
             name: name
         });
@@ -142,6 +150,15 @@ export const updateModule = async (req, res) => {
         }
 
         const { name } = req.body;
+
+        if (name) {
+            if (await checkUniqueness(Module, 'name', name) && name !== module.name) {
+                return res.status(400).json({
+                    status: 'error',
+                    msg: 'Module name is already exist'
+                });
+            }
+        }
 
         const response_module = await module.update({
             name: name
