@@ -6,7 +6,7 @@ import {
     create,
     update,
     destroy
-} from './handler/users/userHandler.js'
+} from './handler/roles/roleHandler.js';
 
 const router = express.Router();
 

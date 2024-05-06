@@ -1,6 +1,7 @@
 import Role from '../models/RoleModel.js';
 import Validator from 'fastest-validator';
 import { Op } from 'sequelize';
+import { checkUniqueness } from '../helpers/checkUnique.js';
 const v = new Validator();
 
 export const getRolesQuery = async (req, res) => {
@@ -98,6 +99,13 @@ export const createRole = async (req, res) => {
 
         const { name, description } = req.body;
 
+        if (await checkUniqueness(Role, 'name', name)) {
+            return res.status(400).json({
+                status: 'error',
+                msg: 'Role name is already exist'
+            });
+        }
+
         const response = await Role.create({
             name: name,
             description: description
@@ -144,6 +152,15 @@ export const updateRole = async (req, res) => {
 
         const { name, description } = req.body;
 
+        if (name) {
+            if (await checkUniqueness(Role, 'name', name) && name !== role.name) {
+                return res.status(400).json({
+                    status: 'error',
+                    msg: 'Role name is already exist'
+                });
+            }
+        }
+
         const roleUpdate = await role.update({
             name: name,
             description: description
@@ -184,7 +201,7 @@ export const deleteRole = async (req, res) => {
             }
         })
         res.status(200).json({
-            status: 'status',
+            status: 'success',
             msg: 'Role deleted'
         })
     } catch (error) {
