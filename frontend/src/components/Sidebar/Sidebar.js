@@ -174,11 +174,11 @@ const Sidebar = (props) => {
           {/* Navigation */}
           <Nav className="mb-md-3" navbar>
             <NavItem>
-              <NavLink to="/admin/icons" tag={NavLinkRRD}>
+              <NavLink to="/admin/modules" tag={NavLinkRRD}>
                 <i className="ni ni-planet" />
                 Modules
               </NavLink>
-              <NavLink to="/admin/icons" tag={NavLinkRRD}>
+              <NavLink to="/admin/permissions" tag={NavLinkRRD}>
                 <i className="ni ni-key-25" />
                 Permissions
               </NavLink>
