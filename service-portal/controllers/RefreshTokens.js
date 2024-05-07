@@ -16,7 +16,7 @@ export const getToken = async (req, res) => {
         if (!token) {
             return res.status(400).json({
                 status: 'error',
-                message: 'Invalid token!'
+                msg: 'Invalid token!'
             })
         }
 
@@ -45,7 +45,7 @@ export const createToken = async (req, res) => {
         if (validate.length) {
             return res.status(400).json({
                 status: 'error',
-                message: validate
+                msg: validate
             })
         }
 
@@ -54,7 +54,7 @@ export const createToken = async (req, res) => {
         if (!user) {
             return res.status(404).json({
                 status: 'error',
-                message: 'User not found'
+                msg: 'User not found'
             })
         }
 

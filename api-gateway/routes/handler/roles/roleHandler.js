@@ -16,7 +16,7 @@ export const getAll = async (req, res) => {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
                 status: 'error',
-                message: 'service unavailable!'
+                msg: 'service unavailable!'
             })
         }
 
@@ -28,7 +28,7 @@ export const getAll = async (req, res) => {
             // If error.response is undefined, handle the error accordingly
             return res.status(500).json({
                 status: 'error',
-                message: 'An unexpected error occurred.'
+                msg: 'An unexpected error occurred.'
             });
         }
     }
@@ -45,7 +45,7 @@ export const getQuery = async (req, res) => {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
                 status: 'error',
-                message: 'service unavailable!'
+                msg: 'service unavailable!'
             })
         }
 
@@ -57,7 +57,7 @@ export const getQuery = async (req, res) => {
             // If error.response is undefined, handle the error accordingly
             return res.status(500).json({
                 status: 'error',
-                message: 'An unexpected error occurred.'
+                msg: 'An unexpected error occurred.'
             });
         }
     }
@@ -71,7 +71,7 @@ export const get = async (req, res) => {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
                 status: 'error',
-                message: 'service unavailable!'
+                msg: 'service unavailable!'
             })
         }
 
@@ -83,7 +83,7 @@ export const get = async (req, res) => {
             // If error.response is undefined, handle the error accordingly
             return res.status(500).json({
                 status: 'error',
-                message: 'An unexpected error occurred.'
+                msg: 'An unexpected error occurred.'
             });
         }
     }
@@ -96,7 +96,7 @@ export const create = async (req, res) => {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
                 status: 'error',
-                message: 'service unavailable!'
+                msg: 'service unavailable!'
             })
         }
 
@@ -108,7 +108,7 @@ export const create = async (req, res) => {
             // If error.response is undefined, handle the error accordingly
             return res.status(500).json({
                 status: 'error',
-                message: 'An unexpected error occurred.'
+                msg: 'An unexpected error occurred.'
             });
         }
     }
@@ -122,7 +122,7 @@ export const update = async (req, res) => {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
                 status: 'error',
-                message: 'service unavailable!'
+                msg: 'service unavailable!'
             })
         }
 
@@ -134,7 +134,7 @@ export const update = async (req, res) => {
             // If error.response is undefined, handle the error accordingly
             return res.status(500).json({
                 status: 'error',
-                message: 'An unexpected error occurred.'
+                msg: 'An unexpected error occurred.'
             });
         }
     }
@@ -148,7 +148,7 @@ export const destroy = async (req, res) => {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
                 status: 'error',
-                message: 'service unavailable!'
+                msg: 'service unavailable!'
             })
         }
 
@@ -160,7 +160,7 @@ export const destroy = async (req, res) => {
             // If error.response is undefined, handle the error accordingly
             return res.status(500).json({
                 status: 'error',
-                message: 'An unexpected error occurred.'
+                msg: 'An unexpected error occurred.'
             });
         }
     }

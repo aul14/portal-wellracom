@@ -93,7 +93,7 @@ export const createRole = async (req, res) => {
         if (validate.length) {
             return res.status(400).json({
                 status: 'error',
-                message: validate
+                msg: validate
             })
         }
 
@@ -133,7 +133,7 @@ export const updateRole = async (req, res) => {
         if (validate.length) {
             return res.status(400).json({
                 status: 'error',
-                message: validate
+                msg: validate
             })
         }
 

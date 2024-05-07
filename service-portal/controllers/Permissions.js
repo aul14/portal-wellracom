@@ -112,7 +112,7 @@ export const createPermission = async (req, res) => {
         if (validate.length) {
             return res.status(400).json({
                 status: 'error',
-                message: validate
+                msg: validate
             })
         }
 
@@ -170,7 +170,7 @@ export const updatePermission = async (req, res) => {
         if (validate.length) {
             return res.status(400).json({
                 status: 'error',
-                message: validate
+                msg: validate
             })
         }
 

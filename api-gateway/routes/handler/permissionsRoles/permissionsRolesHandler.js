@@ -16,7 +16,7 @@ export const attachPermission = async (req, res) => {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
                 status: 'error',
-                message: 'service unavailable!'
+                msg: 'service unavailable!'
             })
         }
 
@@ -28,7 +28,7 @@ export const attachPermission = async (req, res) => {
             // If error.response is undefined, handle the error accordingly
             return res.status(500).json({
                 status: 'error',
-                message: 'An unexpected error occurred.'
+                msg: 'An unexpected error occurred.'
             });
         }
     }
@@ -41,7 +41,7 @@ export const detachPermission = async (req, res) => {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({
                 status: 'error',
-                message: 'service unavailable!'
+                msg: 'service unavailable!'
             })
         }
 
@@ -53,7 +53,7 @@ export const detachPermission = async (req, res) => {
             // If error.response is undefined, handle the error accordingly
             return res.status(500).json({
                 status: 'error',
-                message: 'An unexpected error occurred.'
+                msg: 'An unexpected error occurred.'
             });
         }
     }
