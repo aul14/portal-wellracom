@@ -8,7 +8,8 @@ const {
     JWT_SECRET,
     JWT_SECRET_REFRESH_TOKEN,
     JWT_ACCESS_TOKEN_EXPIRED,
-    JWT_REFRESH_TOKEN_EXPIRED
+    JWT_REFRESH_TOKEN_EXPIRED,
+    SECURE_COOKIE
 } = process.env;
 
 const api = apiAdapter(URL_SERVICE_PORTAL);
@@ -18,17 +19,22 @@ export const login = async (req, res) => {
         const user = await api.post('/login', req.body);
         const data = user.data.data;
 
-        const token = jwt.sign({ data }, JWT_SECRET, { expiresIn: JWT_ACCESS_TOKEN_EXPIRED });
+        const accessToken = jwt.sign({ data }, JWT_SECRET, { expiresIn: JWT_ACCESS_TOKEN_EXPIRED });
         const refreshToken = jwt.sign({ data }, JWT_SECRET_REFRESH_TOKEN, { expiresIn: JWT_REFRESH_TOKEN_EXPIRED });
 
         // cek refresh token dari service-portal refres token
         await api.post('/refresh_tokens', { refreshToken: refreshToken, userId: data.id });
 
+        res.cookie('refreshToken', refreshToken, {
+            httpOnly: true,
+            maxAge: 24 * 60 * 60 * 1000,
+            secure: SECURE_COOKIE
+        })
+
         res.json({
             status: 'success',
             data: {
-                token,
-                refreshToken: refreshToken
+                accessToken
             }
         })
     } catch (error) {
@@ -55,8 +61,16 @@ export const login = async (req, res) => {
 }
 export const logout = async (req, res) => {
     try {
+        const refreshToken = req.cookies.refreshToken;
+        if (!refreshToken) {
+            return res.status(403).json({
+                status: 'error',
+                msg: 'You are out token!'
+            })
+        }
         const id = req.user.data.id;
         const user = await api.post(`/logout`, { userId: id });
+        res.clearCookie('refreshToken');
         res.json(user.data);
     } catch (error) {
         if (error.code === 'ECONNREFUSED') {

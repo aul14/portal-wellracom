@@ -14,11 +14,9 @@ const api = apiAdapter(URL_SERVICE_PORTAL);
 
 export const refreshToken = async (req, res) => {
     try {
-        const refreshToken = req.body.refreshToken;
-        const email = req.body.email;
-
-        if (!refreshToken || !email) {
-            return res.status(400).json({
+        const refreshToken = req.cookies.refreshToken;
+        if (!refreshToken) {
+            return res.status(401).json({
                 status: 'error',
                 msg: 'Invalid token',
             })
@@ -35,19 +33,12 @@ export const refreshToken = async (req, res) => {
                 })
             }
 
-            if (email !== decoded.data.email) {
-                return res.status(400).json({
-                    status: 'error',
-                    msg: 'Invalid email',
-                })
-            }
-
-            const token = jwt.sign({ data: decoded.data }, JWT_SECRET, { expiresIn: JWT_ACCESS_TOKEN_EXPIRED });
+            const accessToken = jwt.sign({ data: decoded.data }, JWT_SECRET, { expiresIn: JWT_ACCESS_TOKEN_EXPIRED });
 
             res.json({
                 status: 'success',
                 data: {
-                    token
+                    accessToken
                 }
             })
         });

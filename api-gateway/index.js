@@ -2,6 +2,7 @@ import express from 'express';
 import FileUpload from 'express-fileupload';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
+import logger from 'morgan'
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -13,15 +14,16 @@ import permissionsRoute from './routes/permissions.js';
 import permissionsRolesRoute from './routes/permissionsRoles.js';
 import refreshTokensRoute from './routes/refreshToken.js';
 
-import verifyToken from './middlewares/verifyToken.js';
+import { verifyToken } from './middlewares/verifyToken.js';
 
 const app = express();
 
 app.use(cors({
     credentials: true,
-    origin: [`http://localhost:${process.env.APP_PORT}`]
+    origin: [`${process.env.URL_FRONTEND}`]
 }))
 
+app.use(logger('dev'));
 app.use(FileUpload());
 app.use(cookieParser());
 app.use(express.json({ limit: '50mb' }));

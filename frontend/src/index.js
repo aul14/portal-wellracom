@@ -10,6 +10,9 @@ import "assets/css/styles.css"
 import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 
+import axios from 'axios';
+axios.defaults.withCredentials = true;
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(

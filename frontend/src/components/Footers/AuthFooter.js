@@ -23,7 +23,7 @@ import { NavItem, NavLink, Nav, Container, Row, Col } from "reactstrap";
 const Login = () => {
   return (
     <>
-      <footer className="py-5">
+      <footer className="py-1">
         <Container>
           <Row className="align-items-center justify-content-xl-between">
             <Col xl="6">
@@ -34,7 +34,7 @@ const Login = () => {
                   href="https://www.wellracom.co.id/"
                   target="_blank"
                 >
-                  Creative Tim
+                  PT Wellracom Industri Komputindo
                 </a>
               </div>
             </Col>

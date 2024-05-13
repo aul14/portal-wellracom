@@ -4,8 +4,15 @@ dotenv.config()
 
 const { JWT_SECRET } = process.env;
 
-const authMiddleware = async (req, res, next) => {
-    const token = req.headers.authorization;
+export const verifyToken = async (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    if (token === null) {
+        return res.status(401).json({
+            status: 'error',
+            msg: 'No token provided'
+        });
+    }
 
     jwt.verify(token, JWT_SECRET, (err, decoded) => {
         if (err) {
@@ -17,7 +24,6 @@ const authMiddleware = async (req, res, next) => {
 
         req.user = decoded;
         next();
-    });
-};
+    })
+}
 
-export default authMiddleware;

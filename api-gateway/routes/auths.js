@@ -4,7 +4,7 @@ import {
     logout
 } from './handler/auth/authHandler.js';
 
-import verifyToken from '../middlewares/verifyToken.js';
+import { verifyToken } from '../middlewares/verifyToken.js';
 
 const router = express.Router();
 
