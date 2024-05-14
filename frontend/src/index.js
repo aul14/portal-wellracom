@@ -11,7 +11,7 @@ import "assets/css/styles.css"
 
 import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
-import PrivateRoute from './components/PrivateRoute.js';
+import PrivateRoute from './features/PrivateRoute.js';
 import Index from './views/Index.js';
 import Tables from './views/examples/Tables.js';
 
