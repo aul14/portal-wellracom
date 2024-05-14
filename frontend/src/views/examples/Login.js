@@ -1,6 +1,7 @@
 // reactstrap components
 import {
   Button,
+  Alert,
   Card,
   CardHeader,
   CardBody,
@@ -10,35 +11,36 @@ import {
   InputGroupAddon,
   InputGroupText,
   InputGroup,
-  Row,
   Col,
 } from "reactstrap";
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-
-const baseUrl = process.env.REACT_APP_API_BASE_URL;
+import { LoginUser, reset } from '../../features/authSlice'
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [msg, setMsg] = useState('');
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [visible, setVisible] = useState(true);
+  const onDismiss = () => setVisible(false);
+  const { user, isError, isSuccess, isLoading, message } = useSelector(
+    (state) => state.auth
+  );
+
+  useEffect(() => {
+    if (isSuccess || user) {
+      navigate("/admin/index");
+    }
+    dispatch(reset());
+  }, [user, isSuccess, dispatch, navigate])
 
   const processAuth = async (e) => {
     e.preventDefault();
-    try {
-      await axios.post(`${baseUrl}/auth/login`, {
-        username: username,
-        password: password
-      });
-      navigate("/admin/index");
-    } catch (error) {
-      if (error.response) {
-        setMsg(error.response.data.msg);
-      }
-    }
+    dispatch(LoginUser({ username, password }));
   }
+
   return (
     <>
       <Col lg="5" md="7">
@@ -50,7 +52,9 @@ const Login = () => {
           </CardHeader>
           <CardBody className="px-lg-5 py-lg-3">
             <Form onSubmit={processAuth} role="form">
-              <p className="text-center">{msg}</p>
+              {isError && <Alert color="danger" isOpen={visible} toggle={onDismiss}>
+                {message}
+              </Alert>}
               <FormGroup className="mb-3">
                 <InputGroup className="input-group-alternative">
                   <InputGroupAddon addonType="prepend">
@@ -97,7 +101,7 @@ const Login = () => {
               </div> */}
               <div className="text-center">
                 <Button className="mt-3" color="primary">
-                  Sign in
+                  {isLoading ? 'Loading...' : "Login"}
                 </Button>
               </div>
             </Form>

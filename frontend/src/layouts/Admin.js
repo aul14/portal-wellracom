@@ -1,22 +1,5 @@
-/*!
-
-=========================================================
-* Argon Dashboard React - v1.2.4
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard-react
-* Copyright 2024 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
-import { useLocation, Route, Routes, Navigate } from "react-router-dom";
+import { useLocation, Route, Routes } from "react-router-dom";
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
@@ -26,9 +9,7 @@ import Sidebar from "components/Sidebar/Sidebar.js";
 
 import Index from '../views/Index.js';
 import Tables from '../views/examples/Tables.js';
-import Icons from '../views/examples/Icons.js';
-
-const Admin = (props) => {
+const Admin = () => {
   const mainContent = React.useRef(null);
   const location = useLocation();
 
@@ -38,7 +19,6 @@ const Admin = (props) => {
     mainContent.current.scrollTop = 0;
   }, [location]);
 
-
   return (
     <>
       <Sidebar />
@@ -47,7 +27,6 @@ const Admin = (props) => {
         <Routes>
           <Route path="/index" element={<Index />} />
           <Route path="/tables" element={<Tables />} />
-          <Route path="/icons" element={<Icons />} />
         </Routes>
         <Container fluid>
           <AdminFooter />
@@ -57,4 +36,9 @@ const Admin = (props) => {
   );
 };
 
+const AdminHome = () => {
+  return <div>Welcome to the Admin Dashboard</div>;
+};
+
 export default Admin;
+export { AdminHome };

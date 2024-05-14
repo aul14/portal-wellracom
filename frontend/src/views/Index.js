@@ -1,17 +1,6 @@
-import { useState } from "react";
-// node.js library that concatenates classes (strings)
-import classnames from "classnames";
 // reactstrap components
 import {
-  Button,
   Card,
-  CardHeader,
-  CardBody,
-  NavItem,
-  NavLink,
-  Nav,
-  Progress,
-  Table,
   Container,
   Row,
   Col,
@@ -49,47 +38,47 @@ function getTodoList(date) {
 
 }
 
-const Index = (props) => {
-  function renderCell(date) {
-    const list = getTodoList(date);
-    const displayList = list.filter((item, index) => index < 2);
+function renderCell(date) {
+  const list = getTodoList(date);
+  const displayList = list.filter((item, index) => index < 2);
 
-    if (list.length) {
-      const moreCount = list.length - displayList.length;
-      const moreItem = (
-        <li>
-          <Whisper
-            placement="top"
-            trigger="click"
-            speaker={
-              <Popover>
-                {list.map((item, index) => (
-                  <p key={index}>
-                    {item.time != null ? <b>{item.time} -</b> : null}  <b>{item.title}</b>
-                  </p>
-                ))}
-              </Popover>
-            }
-          >
-            <a>{moreCount} more</a>
-          </Whisper>
-        </li>
-      );
+  if (list.length) {
+    const moreCount = list.length - displayList.length;
+    const moreItem = (
+      <li>
+        <Whisper
+          placement="top"
+          trigger="click"
+          speaker={
+            <Popover>
+              {list.map((item, index) => (
+                <p key={index}>
+                  {item.time != null ? <b>{item.time} -</b> : null}  <b>{item.title}</b>
+                </p>
+              ))}
+            </Popover>
+          }
+        >
+          <a>{moreCount} more</a>
+        </Whisper>
+      </li>
+    );
 
-      return (
-        <ul className="calendar-todo-list">
-          {displayList.map((item, index) => (
-            <li key={index}>
-              <Badge />  {item.time != null ? <b>{item.time} -</b> : null}  <b>{item.title}</b>
-            </li>
-          ))}
-          {moreCount ? moreItem : null}
-        </ul>
-      );
-    }
-
-    return null;
+    return (
+      <ul className="calendar-todo-list">
+        {displayList.map((item, index) => (
+          <li key={index}>
+            <Badge />  {item.time != null ? <b>{item.time} -</b> : null}  <b>{item.title}</b>
+          </li>
+        ))}
+        {moreCount ? moreItem : null}
+      </ul>
+    );
   }
+
+  return null;
+}
+const Index = (props) => {
   return (
     <>
       <Header />
