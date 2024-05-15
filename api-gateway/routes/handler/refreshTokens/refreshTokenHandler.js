@@ -14,7 +14,8 @@ const api = apiAdapter(URL_SERVICE_PORTAL);
 
 export const refreshToken = async (req, res) => {
     try {
-        const refreshToken = req.cookies.refreshToken;
+        const refreshToken = req.body.refreshToken;
+
         if (!refreshToken) {
             return res.status(401).json({
                 status: 'error',

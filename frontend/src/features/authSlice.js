@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const tokenFromLocalStorage = JSON.parse(localStorage.getItem('token'));
+const refreshtokenFromLocalStorage = JSON.parse(localStorage.getItem('refreshToken'));
 
 const initialState = {
     user: tokenFromLocalStorage || null,
@@ -21,9 +22,11 @@ export const LoginUser = createAsyncThunk("user/LoginUser", async (user, thunkAP
         });
         // Assuming the token is returned in the response
         const token = response.data.data.accessToken;
+        const refreshToken = response.data.data.refreshToken;
 
         // Store the token in local storage
         localStorage.setItem('token', JSON.stringify(token));
+        localStorage.setItem('refreshToken', JSON.stringify(refreshToken));
 
         return response.data;
     } catch (error) {
@@ -37,16 +40,23 @@ export const LoginUser = createAsyncThunk("user/LoginUser", async (user, thunkAP
 
 export const RefreshToken = createAsyncThunk("user/RefreshToken", async (_, thunkAPI) => {
     try {
-        const token = localStorage.getItem('token').replace(/["']/g, "");
-        if (!token) {
+        const tokenLocal = localStorage.getItem('token').replace(/["']/g, "");
+        const refreshTokenLocal = localStorage.getItem('refreshToken').replace(/["']/g, "");
+        if (!tokenLocal) {
             const message = "No token provided";
             return thunkAPI.rejectWithValue(message);
         }
         const response = await axios.post(`${baseUrl}/refresh-tokens`, {
+            refreshToken: refreshTokenLocal
+        }, {
             headers: {
-                Authorization: `Bearer ${token}`
+                Authorization: `Bearer ${tokenLocal}`
             }
         });
+
+        const token = response.data.data.accessToken;
+        // Update the token in local storage
+        localStorage.setItem('token', JSON.stringify(token));
 
         return response.data;
     } catch (error) {
@@ -73,6 +83,7 @@ export const LogOut = createAsyncThunk("user/LogOut", async (_, thunkAPI) => {
         });
 
         localStorage.removeItem('token');
+        localStorage.removeItem('refreshToken');
 
         return response.data;
     } catch (error) {
