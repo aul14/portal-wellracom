@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, Route, Routes } from "react-router-dom";
 // reactstrap components
 import { Container } from "reactstrap";
@@ -13,7 +13,7 @@ const Admin = () => {
   const mainContent = React.useRef(null);
   const location = useLocation();
 
-  React.useEffect(() => {
+  useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
     mainContent.current.scrollTop = 0;
