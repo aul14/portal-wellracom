@@ -5,7 +5,9 @@ import {
     CardBody,
     Container,
     Row,
+    Button
 } from "reactstrap";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 import Header from "components/Headers/Header.js";
 import DataTable from 'react-data-table-component';
 import axiosInstance from '../../app/axiosInstance.js';
@@ -74,6 +76,16 @@ const Tables = () => {
             selector: row => format(new Date(row.updatedAt), 'dd/MM/yyyy HH:ii'),
             sortable: true
         },
+        {
+            name: 'Actions',
+            cell: row => (
+                <div>
+                    <Button color="info" size="sm" title='Edit'><i className='fa fa-edit'></i></Button>{' '}
+                    <Button color="danger" size="sm" title='Delete'><i className='fa fa-trash'></i></Button>
+                </div>
+            ),
+            button: true // This flag is used to render a button component
+        }
         // Add more columns as needed
     ];
 
@@ -92,7 +104,7 @@ const Tables = () => {
                             <CardBody>
                                 <div className="row">
                                     <div className="col-6">
-                                        <button className='btn btn-primary'>Add Modules</button>
+                                        <Button color="primary" size="sm">Add Module</Button>
                                     </div>
                                     <div className="col-6">
                                         <div className="mb-3">

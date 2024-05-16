@@ -46,3 +46,58 @@ html {
     width: 6px;
     height: 6px;
 }
+
+/* Custom DataTable styles */
+.dataTable {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.dataTable th,
+.dataTable td {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+    text-align: left;
+}
+
+.dataTable th {
+    background-color: #f8f9fa;
+}
+
+.dataTable .pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.dataTable .pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.dataTable .pagination button.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.dataTable .pagination button.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.dataTable .pagination input {
+    width: 60px;
+    text-align: center;
+}
+
+.dataTable .pagination label {
+    margin: 0 10px;
+}
+
+.dataTable .noResults {
+    text-align: center;
+    padding: 20px 0;
+}

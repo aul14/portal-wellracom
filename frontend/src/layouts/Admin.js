@@ -11,17 +11,20 @@ import Sidebar from "components/Sidebar/Sidebar.js";
 import Index from '../views/Index.js';
 import Tables from '../views/examples/Tables.js';
 import Modules from '../views/modules/Index.js';
+
+const tokenExp = process.env.REACT_APP_TOKEN_EXPIRY;
+
 const Admin = () => {
   const mainContent = React.useRef(null);
   const location = useLocation();
-  const tokenExp = process.env.TOKEN_EXPIRY;
 
+  console.log(tokenExp);
 
   useEffect(() => {
     // Mulai interval untuk memeriksa dan memperbarui token
     const intervalId = setInterval(() => {
       checkExpToken();
-    }, tokenExp * 60 * 1000); // miledetik
+    }, parseInt(tokenExp) * 60 * 1000); // miliseconds
 
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
