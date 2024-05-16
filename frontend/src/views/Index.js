@@ -7,7 +7,7 @@ import {
 } from "reactstrap";
 
 
-import Header from "components/Headers/Header.js";
+import Header from "components/Headers/HeaderCard.js";
 
 import { Calendar, Whisper, Popover, Badge } from 'rsuite';
 import 'rsuite/dist/rsuite.css';

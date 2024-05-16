@@ -44,7 +44,7 @@ const Login = () => {
   return (
     <>
       <Col lg="5" md="7">
-        <Card className="bg-secondary shadow border-0">
+        <Card className="shadow border-0">
           <CardHeader className="bg-transparent pb-1">
             <div className="text-muted text-center mt-2">
               <h4>Login</h4>

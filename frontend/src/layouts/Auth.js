@@ -8,7 +8,7 @@ import AuthNavbar from "components/Navbars/AuthNavbar.js";
 import AuthFooter from "components/Footers/AuthFooter.js";
 
 
-import Login from '../views/examples/Login.js';
+import Login from '../views/auth/Login.js';
 
 const Auth = (props) => {
   const mainContent = React.useRef(null);

@@ -12,8 +12,10 @@ import "assets/css/styles.css"
 import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 import PrivateRoute from './features/PrivateRoute.js';
+
 import Index from './views/Index.js';
 import Tables from './views/examples/Tables.js';
+import Modules from './views/modules/Index.js';
 
 import axios from 'axios';
 axios.defaults.withCredentials = true;
@@ -30,6 +32,7 @@ root.render(
               {/* Define nested routes here */}
               <Route path="index" element={<Index />} />
               <Route path="tables" element={<Tables />} />
+              <Route path="modules" element={<Modules />} />
               <Route path="*" element={<Navigate to="/admin/index" replace />} />
             </Route>
           </Route>

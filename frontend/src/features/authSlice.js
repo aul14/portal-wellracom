@@ -1,8 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axiosInstance from '../app/axiosInstance.js';
 
 const tokenFromLocalStorage = JSON.parse(localStorage.getItem('token'));
-const refreshtokenFromLocalStorage = JSON.parse(localStorage.getItem('refreshToken'));
 
 const initialState = {
     user: tokenFromLocalStorage || null,
@@ -16,7 +15,7 @@ const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
 export const LoginUser = createAsyncThunk("user/LoginUser", async (user, thunkAPI) => {
     try {
-        const response = await axios.post(`${baseUrl}/auth/login`, {
+        const response = await axiosInstance.post(`${baseUrl}/auth/login`, {
             username: user.username,
             password: user.password
         });
@@ -46,7 +45,7 @@ export const RefreshToken = createAsyncThunk("user/RefreshToken", async (_, thun
             const message = "No token provided";
             return thunkAPI.rejectWithValue(message);
         }
-        const response = await axios.post(`${baseUrl}/refresh-tokens`, {
+        const response = await axiosInstance.post(`${baseUrl}/refresh-tokens`, {
             refreshToken: refreshTokenLocal
         }, {
             headers: {
@@ -76,7 +75,7 @@ export const LogOut = createAsyncThunk("user/LogOut", async (_, thunkAPI) => {
             return thunkAPI.rejectWithValue(message);
         }
 
-        const response = await axios.post(`${baseUrl}/auth/logout`, {}, {
+        const response = await axiosInstance.post(`${baseUrl}/auth/logout`, {}, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
