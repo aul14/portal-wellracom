@@ -8,21 +8,20 @@ import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 
-
 import Index from '../views/Index.js';
 import Tables from '../views/examples/Tables.js';
 import Modules from '../views/modules/Index.js';
 const Admin = () => {
   const mainContent = React.useRef(null);
   const location = useLocation();
+  const tokenExp = process.env.TOKEN_EXPIRY;
+
 
   useEffect(() => {
-    console.log("Setting up interval...");
     // Mulai interval untuk memeriksa dan memperbarui token
     const intervalId = setInterval(() => {
       checkExpToken();
-      console.log("Interval running..."); // Debug log
-    }, 1 * 60 * 1000); // 1 menit dalam milidetik
+    }, tokenExp * 60 * 1000); // miledetik
 
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
@@ -30,7 +29,6 @@ const Admin = () => {
 
     // Membersihkan interval saat komponen unmount
     return () => {
-      console.log("Clearing interval..."); // Debug log
       clearInterval(intervalId);
     };
   }, [location]);
