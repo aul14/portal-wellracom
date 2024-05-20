@@ -13,12 +13,6 @@ import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 import PrivateRoute from './features/PrivateRoute.js';
 
-import Index from './views/Index.js';
-import Tables from './views/examples/Tables.js';
-import Modules from './views/modules/Index.js';
-import CreateModule from './views/modules/Create.js';
-import EditModule from './views/modules/Edit.js';
-
 import axios from 'axios';
 axios.defaults.withCredentials = true;
 
@@ -32,13 +26,6 @@ root.render(
         <Routes>
           <Route path="/admin/*" element={<PrivateRoute />}>
             <Route path="" element={<AdminLayout />}>
-              {/* Define nested routes here */}
-              <Route path="index" element={<Index />} />
-              <Route path="tables" element={<Tables />} />
-              <Route path="modules" element={<Modules />} >
-                <Route path="add" element={<CreateModule />} />
-                <Route path="edit/:id" element={<EditModule />} />
-              </Route>
               <Route path="*" element={<Navigate to="/admin/index" replace />} />
             </Route>
           </Route>

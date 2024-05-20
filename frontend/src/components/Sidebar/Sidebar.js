@@ -171,10 +171,10 @@ const Sidebar = (props) => {
           </Nav>
           <Nav className="mb-md-3" navbar>
             <NavItem className="active-pro active">
-              <button onClick={logout} className="nav-link px-3">
+              <NavLink to="/logout" onClick={logout} tag={NavLinkRRD}>
                 <i className="ni ni-button-power" />
                 Logout
-              </button>
+              </NavLink>
             </NavItem>
           </Nav>
         </Collapse>
