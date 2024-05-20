@@ -31,10 +31,6 @@ const Create = () => {
         try {
             await axiosInstance.post(`${baseUrl}/modules`, {
                 name: name,
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
             })
             navigate('/admin/modules');
         } catch (error) {

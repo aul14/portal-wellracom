@@ -30,7 +30,9 @@ const Tables = () => {
     }, [search, perPage, currentPage]);
 
     const fetchData = async () => {
+        console.log('Fetching data...');
         try {
+            setLoading(true);
             const response = await axiosInstance.get(`${baseUrl}/modules/query`, {
                 params: {
                     draw: currentPage,
@@ -38,17 +40,15 @@ const Tables = () => {
                     length: perPage,
                     search: search,
                     order: 'desc'
-                },
-                headers: {
-                    Authorization: `Bearer ${token}`
                 }
             });
             const json = response.data;
             setData(json.data);
             setTotalRows(json.recordsTotal);
-            setLoading(false);
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false);
         }
     }
 

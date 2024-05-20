@@ -30,11 +30,7 @@ const Edit = () => {
     useEffect(() => {
         const getModuleById = async () => {
             try {
-                const response = await axiosInstance.get(`${baseUrl}/modules/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`
-                    }
-                });
+                const response = await axiosInstance.get(`${baseUrl}/modules/${id}`);
                 setName(response.data.data.name);
 
             } catch (error) {
@@ -52,10 +48,6 @@ const Edit = () => {
         try {
             await axiosInstance.put(`${baseUrl}/modules/${id}`, {
                 name: name,
-            }, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
             })
             navigate('/admin/modules');
         } catch (error) {
