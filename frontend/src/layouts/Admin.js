@@ -22,6 +22,7 @@ const Admin = () => {
 
   useEffect(() => {
     // Mulai interval untuk memeriksa dan memperbarui token
+    // checkExpToken();
     const intervalId = setInterval(() => {
       checkExpToken();
     }, parseInt(tokenExp) * 60 * 1000); // miliseconds
