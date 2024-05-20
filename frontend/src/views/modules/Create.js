@@ -53,12 +53,17 @@ const Create = () => {
                                     {msg}
                                 </Alert>}
                                 <Form onSubmit={saveModule}>
-                                    <FormGroup row>
-                                        <Label sm={2}>Name</Label>
-                                        <Col sm={10}>
-                                            <Input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
-                                        </Col>
-                                    </FormGroup>
+                                    <div className="row">
+                                        <div className="col-md-6">
+                                            <FormGroup row>
+                                                <Label sm={2}>Name</Label>
+                                                <Col sm={10}>
+                                                    <Input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
+                                                </Col>
+                                            </FormGroup>
+
+                                        </div>
+                                    </div>
 
                                     <FormGroup row>
                                         <Col sm={6}>

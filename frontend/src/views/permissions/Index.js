@@ -31,7 +31,7 @@ const Index = () => {
     const fetchData = async () => {
         try {
             setLoading(true);
-            const response = await axiosInstance.get(`${baseUrl}/modules/query`, {
+            const response = await axiosInstance.get(`${baseUrl}/permissions/query`, {
                 params: {
                     draw: currentPage,
                     start: (currentPage - 1) * perPage,
@@ -53,7 +53,7 @@ const Index = () => {
     const deleteData = async (id) => {
         if (window.confirm("Are you sure you want to delete this item?")) {
             try {
-                await axiosInstance.delete(`${baseUrl}/modules/${id}`);
+                await axiosInstance.delete(`${baseUrl}/permissions/${id}`);
                 fetchData();
             } catch (error) {
                 console.error('Error deleting data:', error);
@@ -80,15 +80,30 @@ const Index = () => {
             name: 'Actions',
             cell: row => (
                 <div>
-                    <Link to={`/admin/modules/edit/${row.id}`} className='btn btn-sm btn-info' title='Edit'><i className='fa fa-edit'></i></Link>{''}
+                    <Link to={`/admin/permissions/edit/${row.id}`} className='btn btn-sm btn-info' title='Edit'><i className='fa fa-edit'></i></Link>{''}
                     <Button onClick={() => deleteData(row.id)} color="danger" size="sm" title='Delete'><i className='fa fa-trash'></i></Button>
                 </div>
             ),
-            button: true // This flag is used to render a button component
+            button: true
+        },
+        {
+            name: 'Key Name',
+            selector: row => row.keyName,
+            sortable: true
         },
         {
             name: 'Name',
             selector: row => row.name,
+            sortable: true
+        },
+        {
+            name: 'Description',
+            selector: row => row.description,
+            sortable: true
+        },
+        {
+            name: 'Module',
+            selector: row => row.module.name,
             sortable: true
         },
         {
@@ -108,12 +123,12 @@ const Index = () => {
                     <div className="col">
                         <Card className="shadow">
                             <CardHeader className="border-0">
-                                <h3 className="mb-0">List Modules</h3>
+                                <h3 className="mb-0">List Permissions</h3>
                             </CardHeader>
                             <CardBody>
                                 <div className="row">
                                     <div className="col-6">
-                                        <Link className='btn btn-sm btn-primary' to={"/admin/modules/add"}>Add Module</Link>
+                                        <Link className='btn btn-sm btn-primary' to={"/admin/permissions/add"}>Add Permission</Link>
                                     </div>
                                     <div className="col-6">
                                         <div>

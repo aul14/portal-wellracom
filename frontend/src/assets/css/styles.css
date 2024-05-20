@@ -11,9 +11,9 @@ html {
 }
 
 /* Optional: show position indicator in red */
-::-webkit-scrollbar-thumb {
+/* ::-webkit-scrollbar-thumb {
     background: #11A0EF !important;
-}
+} */
 
 @-moz-document url-prefix() {
 
