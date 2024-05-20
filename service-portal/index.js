@@ -2,7 +2,7 @@ import express from 'express';
 import FileUpload from 'express-fileupload';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import db from './config/Database.js';
+
 import AuthRoute from './routes/AuthRoute.js';
 import UserRoute from './routes/UserRoute.js';
 import ModuleRoute from './routes/ModuleRoute.js';
@@ -10,7 +10,7 @@ import RefreshToken from './routes/RefreshTokenRoute.js';
 import RoleRoute from './routes/RoleRoute.js';
 import PermissionRoute from './routes/PermissionRoute.js';
 import PermissionRoleRoute from './routes/PermissionRoleRoute.js';
-dotenv.config()
+dotenv.config();
 
 const app = express();
 
@@ -31,12 +31,6 @@ app.use(PermissionRoute);
 app.use(RefreshToken);
 app.use(AuthRoute);
 app.use(PermissionRoleRoute);
-
-
-// Uncoment perintah dibawah untuk langsung auto migrate, setelah itu coment lagi.
-// (async () => {
-//     await db.sync();
-// })();
 
 app.listen(process.env.APP_PORT, () => {
     console.log("Server up and running...");
