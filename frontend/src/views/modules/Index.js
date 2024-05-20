@@ -23,7 +23,6 @@ const Tables = () => {
     const [search, setSearch] = useState('');
     const [perPage, setPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
-    const token = localStorage.getItem('token').replace(/["']/g, "");
 
     useEffect(() => {
         fetchData();

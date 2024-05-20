@@ -23,7 +23,6 @@ const Create = () => {
     const [visible, setVisible] = useState(true);
     const onDismiss = () => setVisible(false);
     const navigate = useNavigate();
-    const token = localStorage.getItem('token').replace(/["']/g, "");
     const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
     const saveModule = async (e) => {
