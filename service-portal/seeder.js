@@ -14,10 +14,10 @@ import argon2 from 'argon2';
 
         await Modules.bulkCreate([
             { name: 'Profile' },
-            { name: 'Module' },
-            { name: 'Permission' },
-            { name: 'User Management' },
-            { name: 'Role' },
+            { name: 'Modules' },
+            { name: 'Permissions' },
+            { name: 'Users Management' },
+            { name: 'Roles' },
             { name: 'No Module' }
         ]);
 

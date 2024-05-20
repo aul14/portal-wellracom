@@ -11,7 +11,11 @@ import {
   Media,
 } from "reactstrap";
 
+import { jwtDecode } from 'jwt-decode';
+
 const AdminNavbar = (props) => {
+  const userData = jwtDecode(localStorage.getItem('token').replace(/["']/g, ""));
+
   return (
     <>
       <Navbar className="navbar-top navbar-dark" expand="md" id="navbar-main">
@@ -35,7 +39,7 @@ const AdminNavbar = (props) => {
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
                     <span className="mb-0 text-sm font-weight-bold">
-                      Super Admin
+                      {userData.data.name}
                     </span>
                   </Media>
                 </Media>

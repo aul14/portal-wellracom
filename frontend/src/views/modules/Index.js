@@ -8,6 +8,7 @@ import {
     Button
 } from "reactstrap";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { Link } from 'react-router-dom'
 import Header from "components/Headers/Header.js";
 import DataTable from 'react-data-table-component';
 import axiosInstance from '../../app/axiosInstance.js';
@@ -36,7 +37,7 @@ const Tables = () => {
                     start: (currentPage - 1) * perPage,
                     length: perPage,
                     search: search,
-                    order: 'asc'
+                    order: 'desc'
                 },
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -48,6 +49,17 @@ const Tables = () => {
             setLoading(false);
         } catch (error) {
             console.error('Error fetching data:', error);
+        }
+    }
+
+    const deleteData = async (id) => {
+        if (window.confirm("Are you sure you want to delete this item?")) {
+            try {
+                await axiosInstance.delete(`${baseUrl}/modules/${id}`);
+                fetchData();
+            } catch (error) {
+                console.error('Error deleting data:', error);
+            }
         }
     }
 
@@ -80,8 +92,8 @@ const Tables = () => {
             name: 'Actions',
             cell: row => (
                 <div>
-                    <Button color="info" size="sm" title='Edit'><i className='fa fa-edit'></i></Button>{' '}
-                    <Button color="danger" size="sm" title='Delete'><i className='fa fa-trash'></i></Button>
+                    <Link to={`/admin/modules/edit/${row.id}`} className='btn btn-sm btn-info' title='Edit'><i className='fa fa-edit'></i></Link>{' '}
+                    <Button onClick={() => deleteData(row.id)} color="danger" size="sm" title='Delete'><i className='fa fa-trash'></i></Button>
                 </div>
             ),
             button: true // This flag is used to render a button component
@@ -104,10 +116,10 @@ const Tables = () => {
                             <CardBody>
                                 <div className="row">
                                     <div className="col-6">
-                                        <Button color="primary" size="sm">Add Module</Button>
+                                        <Link className='btn btn-sm btn-primary' to={"/admin/modules/add"}>Add Module</Link>
                                     </div>
                                     <div className="col-6">
-                                        <div className="mb-3">
+                                        <div>
                                             <input
                                                 type="text"
                                                 className="form-control"
