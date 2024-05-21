@@ -157,7 +157,7 @@ const Sidebar = (props) => {
                 <i className="ni ni-key-25" />
                 Permissions
               </NavLink>
-              <NavLink to="/admin/icons" tag={NavLinkRRD}>
+              <NavLink to="/admin/roles" tag={NavLinkRRD}>
                 <i className="ni ni-controller" />
                 Roles
               </NavLink>
