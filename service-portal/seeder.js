@@ -32,14 +32,14 @@ import argon2 from 'argon2';
                 username: 'admin',
                 email: 'admin@gmail.com',
                 password: await argon2.hash('123456'),
-                roleId: 1
+                role_id: 1
             },
             {
                 name: 'Test user',
                 username: 'user',
                 email: 'user@gmail.com',
                 password: await argon2.hash('123456'),
-                roleId: 2
+                role_id: 2
             },
         ]);
 

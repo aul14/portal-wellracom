@@ -64,7 +64,7 @@ const Users = db.define('users', {
         type: DataTypes.STRING,
         allowNull: true
     },
-    roleId: {
+    role_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
@@ -76,6 +76,6 @@ const Users = db.define('users', {
 })
 
 Role.hasMany(Users)
-Users.belongsTo(Role, { foreignKey: 'roleId' })
+Users.belongsTo(Role, { foreignKey: 'role_id' })
 
 export default Users
