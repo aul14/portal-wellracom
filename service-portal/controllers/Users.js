@@ -28,7 +28,7 @@ export const getUsersQuery = async (req, res) => {
             order: [['id', sortOrder]],
             limit: parseInt(length),
             offset: parseInt(start),
-            attributes: ['id', 'name', 'username', 'email', 'avatar', 'date_start', 'date_end', 'createdAt', 'updatedAt'],
+            attributes: ['id', 'name', 'username', 'email', 'url_avatar', 'date_start', 'date_end', 'createdAt', 'updatedAt'],
             include: [{
                 model: Role,
                 attributes: ['id', 'name'],

@@ -163,7 +163,7 @@ const Sidebar = (props) => {
               </NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/admin/tables" tag={NavLinkRRD}>
+              <NavLink to="/admin/users" tag={NavLinkRRD}>
                 <i className="fas fa-users" />
                 Users Management
               </NavLink>

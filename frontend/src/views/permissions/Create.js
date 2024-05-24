@@ -15,6 +15,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import Header from "components/Headers/Header.js";
+import ErrorAlerts from 'components/ErrorAlerts.js';
 import axiosInstance from '../../app/axiosInstance.js';
 import Select from 'react-select';
 
@@ -24,9 +25,7 @@ const Create = () => {
     const [description, setDescription] = useState("");
     const [modules, setModules] = useState([]);
     const [selectedModule, setSelectedModule] = useState("");
-    const [msg, setMsg] = useState("");
-    const [visible, setVisible] = useState(true);
-    const onDismiss = () => setVisible(false);
+    const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
     const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -62,10 +61,13 @@ const Create = () => {
                 description: description,
                 moduleId: selectedModule && selectedModule.value
             })
+
             navigate('/admin/permissions');
         } catch (error) {
-            if (error.response) {
-                setMsg(error.response.data.msg)
+            if (error.response.data.status === 'error' && Array.isArray(error.response.data.msg)) {
+                setErrors(error.response.data.msg);
+            } else {
+                setErrors([{ message: error.response.data.msg }]);
             }
         }
     }
@@ -80,9 +82,7 @@ const Create = () => {
                                 <h3 className="mb-0">Form Add Permission</h3>
                             </CardHeader>
                             <CardBody>
-                                {msg && <Alert color="danger" isOpen={visible} toggle={onDismiss}>
-                                    {msg}
-                                </Alert>}
+                                <ErrorAlerts errors={errors} />
                                 <Form onSubmit={savePermission}>
                                     <div className="row">
                                         <div className="col-md-6">

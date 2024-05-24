@@ -19,6 +19,9 @@ import EditPermission from '../views/permissions/Edit.js';
 import Roles from '../views/roles/Index.js';
 import CreateRole from '../views/roles/Create.js';
 import EditRole from '../views/roles/Edit.js';
+import Users from '../views/users/Index.js';
+import CreateUser from '../views/users/Create.js';
+import EditUser from '../views/users/Edit.js';
 
 const tokenExp = process.env.REACT_APP_TOKEN_EXPIRY;
 
@@ -60,6 +63,9 @@ const Admin = () => {
           <Route path="/roles" element={<Roles />} />
           <Route path="/roles/add" element={<CreateRole />} />
           <Route path="/roles/edit/:id" element={<EditRole />} />
+          <Route path="/users" element={<Users />} />
+          <Route path="/users/add" element={<CreateUser />} />
+          <Route path="/users/edit/:id" element={<EditUser />} />
         </Routes>
         <Container fluid>
           <AdminFooter />
