@@ -3,7 +3,8 @@ import dotenv from 'dotenv';
 dotenv.config()
 
 const {
-    URL_SERVICE_PORTAL
+    URL_SERVICE_PORTAL,
+    URL_SERVICE_PORTAL_OUT
 } = process.env;
 
 const api = apiAdapter(URL_SERVICE_PORTAL);
@@ -40,7 +41,18 @@ export const getQuery = async (req, res) => {
                 ...req.query
             }
         });
-        res.json(users.data)
+        const response = users.data
+        const newBaseUrl = URL_SERVICE_PORTAL_OUT;
+        if (Array.isArray(response.data)) {
+            response.data.forEach(user => {
+                if (user.url_avatar) {
+                    let urlParts = user.url_avatar.split('/');
+                    let protocolAndHost = urlParts[0] + '//' + urlParts[2]; // "http://localhost:5000"
+                    user.url_avatar = user.url_avatar.replace(protocolAndHost, newBaseUrl);
+                }
+            });
+        }
+        res.json(response)
     } catch (error) {
         if (error.code === 'ECONNREFUSED') {
             return res.status(500).json({

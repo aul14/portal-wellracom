@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { store } from './store.js'; // Sesuaikan impor sesuai lokasi store Anda
-import { RefreshToken, LogOut } from '../features/authSlice.js';
+import { RefreshToken, LogOut, LoginUser } from '../features/authSlice.js';
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL
 
@@ -29,14 +29,19 @@ axiosInstance.interceptors.response.use(
         if (error.response.status === 403 && error.response.data.msg === 'jwt expired' && !originalRequest._retry) {
             originalRequest._retry = true;
             try {
-                const refreshResponse = await store.dispatch(RefreshToken());
-                const newToken = refreshResponse.payload.data.accessToken;
+                localStorage.removeItem('token');
+                localStorage.removeItem('refreshToken');
 
-                // Perbarui token di local storage
-                localStorage.setItem('token', JSON.stringify(newToken));
+                window.location.href = '/auth/login'; // Arahkan pengguna ke halaman login
 
-                // Perbarui header Authorization dan ulangi permintaan
-                originalRequest.headers.Authorization = `Bearer ${newToken}`;
+                // const refreshResponse = await store.dispatch(RefreshToken());
+                // const newToken = refreshResponse.payload.data.accessToken;
+
+                // // Perbarui token di local storage
+                // localStorage.setItem('token', JSON.stringify(newToken));
+
+                // // Perbarui header Authorization dan ulangi permintaan
+                // originalRequest.headers.Authorization = `Bearer ${newToken}`;
                 return axiosInstance(originalRequest);
             } catch (refreshError) {
                 // Jika refresh token juga kadaluwarsa, logout pengguna
