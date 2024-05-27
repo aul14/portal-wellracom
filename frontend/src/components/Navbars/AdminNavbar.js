@@ -39,7 +39,7 @@ const AdminNavbar = (props) => {
                   <span className="avatar avatar-sm rounded-circle">
                     <img
                       alt="..."
-                      src={userData.data.urlAvatar ? newUrlImage : require("../../assets/img/theme/user-default.png")}
+                      src={userData.data.urlAvatar !== null ? newUrlImage : require("../../assets/img/theme/user-default.png")}
                     />
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
