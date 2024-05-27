@@ -15,11 +15,16 @@ import { jwtDecode } from 'jwt-decode';
 
 const AdminNavbar = (props) => {
   const userData = jwtDecode(localStorage.getItem('token').replace(/["']/g, ""));
-  let originalUrl = userData.data.urlAvatar;
-  let newBaseUrl = process.env.REACT_APP_URL_SERVICE_PORTAL_OUT;
-  let urlParts = originalUrl.split('/');
-  let protocolAndHost = urlParts[0] + '//' + urlParts[2];
-  let newUrlImage = originalUrl.replace(protocolAndHost, newBaseUrl);
+  let newUrlImage;
+  if (userData.data.urlAvatar) {
+    let originalUrl = userData.data.urlAvatar;
+    let newBaseUrl = process.env.REACT_APP_URL_SERVICE_PORTAL_OUT;
+    let urlParts = originalUrl.split('/');
+    let protocolAndHost = urlParts[0] + '//' + urlParts[2];
+    newUrlImage = originalUrl.replace(protocolAndHost, newBaseUrl);
+  } else {
+    newUrlImage = null;
+  }
 
   return (
     <>
@@ -39,7 +44,7 @@ const AdminNavbar = (props) => {
                   <span className="avatar avatar-sm rounded-circle">
                     <img
                       alt="..."
-                      src={userData.data.urlAvatar !== null ? newUrlImage : require("../../assets/img/theme/user-default.png")}
+                      src={newUrlImage ? newUrlImage : require("../../assets/img/theme/user-default.png")}
                     />
                   </span>
                   <Media className="ml-2 d-none d-lg-block">
