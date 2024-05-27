@@ -1,7 +1,7 @@
-FROM node:alpine3.19
+FROM node
 #create a aoo directory
 
-WORKDIR /app
+WORKDIR /usr/src/app
 
 #Install App Dependencies
 
@@ -9,7 +9,7 @@ COPY package*.json ./
 
 #run npm install
 
-RUN npm install
+RUN npm install --force
 
 #bundle app source
 
