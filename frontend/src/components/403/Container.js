@@ -1,7 +1,7 @@
 // src/components/Container.js
 import React, { useEffect } from 'react';
 import Lock from './Lock.js';
-import '../../assets/css/403.css';
+import 'assets/css/403.css';
 import { Link } from 'react-router-dom';
 
 const Container = () => {

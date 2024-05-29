@@ -1,4 +1,4 @@
-import Container from '../../components/403/Container.js';
+import Container from 'components/403/Container.js';
 const Forbidden = () => {
     return (
         <div style={{ backgroundColor: '#a74006', minHeight: '100vh' }}>

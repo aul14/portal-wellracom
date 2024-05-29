@@ -11,9 +11,9 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Link } from 'react-router-dom'
 import Header from "components/Headers/Header.js";
 import DataTable from 'react-data-table-component';
-import axiosInstance from '../../app/axiosInstance.js';
+import axiosInstance from 'app/axiosInstance.js';
 import { format } from 'date-fns';
-import defaultAvatar from '../../assets/img/theme/user-default.png';
+import defaultAvatar from 'assets/img/theme/user-default.png';
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL;
 

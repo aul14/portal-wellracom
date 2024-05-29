@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../assets/css/403.css';
+import 'assets/css/403.css';
 
 const Lock = () => {
     return (

@@ -15,7 +15,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Header from "components/Headers/Header.js";
 import ErrorAlerts from 'components/ErrorAlerts.js';
-import axiosInstance from '../../app/axiosInstance.js';
+import axiosInstance from 'app/axiosInstance.js';
 
 const Edit = () => {
     const [name, setName] = useState("");
