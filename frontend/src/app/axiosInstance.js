@@ -8,6 +8,12 @@ const axiosInstance = axios.create({
     baseURL: baseUrl,
 });
 
+const navigateTo = (path) => {
+    // Navigate to the specified path
+    // You can use your preferred navigation method here
+    window.location.href = path;
+};
+
 // Interceptor permintaan untuk menambahkan token ke header
 axiosInstance.interceptors.request.use(async (config) => {
     const token = JSON.parse(localStorage.getItem('token'));
@@ -26,13 +32,20 @@ axiosInstance.interceptors.response.use(
     },
     async (error) => {
         const originalRequest = error.config;
+        if (error.response.status === 403 && error.response.data.msg === "You don't have permission!") {
+            // Lakukan navigasi ke halaman akses ditolak
+            navigateTo('/acces-denied');
+            // window.location.href = '/admin/access-denied'
+            return Promise.reject(error);
+        }
+
         if (error.response.status === 403 && error.response.data.msg === 'jwt expired' && !originalRequest._retry) {
             originalRequest._retry = true;
             try {
                 localStorage.removeItem('token');
                 localStorage.removeItem('refreshToken');
 
-                window.location.href = '/auth/login'; // Arahkan pengguna ke halaman login
+                navigateTo('/auth/login'); // Arahkan pengguna ke halaman login
 
                 // const refreshResponse = await store.dispatch(RefreshToken());
                 // const newToken = refreshResponse.payload.data.accessToken;
@@ -47,7 +60,7 @@ axiosInstance.interceptors.response.use(
                 // Jika refresh token juga kadaluwarsa, logout pengguna
                 if (refreshError.response && refreshError.response.data.msg === 'jwt expired') {
                     await store.dispatch(LogOut());
-                    window.location.href = '/auth/login'; // Arahkan pengguna ke halaman login
+                    navigateTo('/auth/login'); // Arahkan pengguna ke halaman login
                 }
                 return Promise.reject(refreshError);
             }

@@ -11,7 +11,7 @@ export const checkPermissions = (...requiredPermissions) => {
         if (!hasPermission) {
             return res.status(403).json({
                 status: 'error',
-                msg: 'You don\'t have permission!'
+                msg: "You don't have permission!"
             });
         }
 

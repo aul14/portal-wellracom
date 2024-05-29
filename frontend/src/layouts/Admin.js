@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation, Route, Routes } from "react-router-dom";
-import { checkExpToken } from '../features/checkExpToken.js';
+import { checkExpToken } from 'features/checkExpToken.js';
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
@@ -8,20 +8,20 @@ import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import AdminFooter from "components/Footers/AdminFooter.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 
-import Index from '../views/Index.js';
-import Tables from '../views/examples/Tables.js';
-import Modules from '../views/modules/Index.js';
-import CreateModule from '../views/modules/Create.js';
-import EditModule from '../views/modules/Edit.js';
-import Permissions from '../views/permissions/Index.js';
-import CreatePermission from '../views/permissions/Create.js';
-import EditPermission from '../views/permissions/Edit.js';
-import Roles from '../views/roles/Index.js';
-import CreateRole from '../views/roles/Create.js';
-import EditRole from '../views/roles/Edit.js';
-import Users from '../views/users/Index.js';
-import CreateUser from '../views/users/Create.js';
-import EditUser from '../views/users/Edit.js';
+import Index from 'views/Index.js';
+import Tables from 'views/examples/Tables.js';
+import Modules from 'views/modules/Index.js';
+import CreateModule from 'views/modules/Create.js';
+import EditModule from 'views/modules/Edit.js';
+import Permissions from 'views/permissions/Index.js';
+import CreatePermission from 'views/permissions/Create.js';
+import EditPermission from 'views/permissions/Edit.js';
+import Roles from 'views/roles/Index.js';
+import CreateRole from 'views/roles/Create.js';
+import EditRole from 'views/roles/Edit.js';
+import Users from 'views/users/Index.js';
+import CreateUser from 'views/users/Create.js';
+import EditUser from 'views/users/Edit.js';
 
 const tokenExp = process.env.REACT_APP_TOKEN_EXPIRY;
 

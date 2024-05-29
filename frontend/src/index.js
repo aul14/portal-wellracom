@@ -12,6 +12,7 @@ import "assets/css/styles.css"
 import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
 import PrivateRoute from './features/PrivateRoute.js';
+import Forbidden from 'views/errors/Forbidden.js';
 
 import axios from 'axios';
 axios.defaults.withCredentials = true;
@@ -24,11 +25,14 @@ root.render(
     <Provider store={store}>
       <BrowserRouter>
         <Routes>
+          <Route path="/acces-denied" element={<Forbidden />} />
+
           <Route path="/admin/*" element={<PrivateRoute />}>
             <Route path="" element={<AdminLayout />}>
               <Route path="*" element={<Navigate to="/admin/index" replace />} />
             </Route>
           </Route>
+
           <Route path="/auth/*" element={<AuthLayout />} />
           <Route path="*" element={<Navigate to="/auth/login" replace />} />
         </Routes>
