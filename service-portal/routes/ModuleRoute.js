@@ -5,12 +5,14 @@ import {
     createModule,
     updateModule,
     deleteModule,
-    getModulesQuery
+    getModulesQuery,
+    getModulesWithPermission
 } from '../controllers/Modules.js';
 
 const router = express.Router();
 
 router.get('/modules/query', getModulesQuery);
+router.get('/modules/withpermissions', getModulesWithPermission);
 router.get('/modules', getModules);
 router.get('/modules/:id', getModuleById);
 router.post('/modules', createModule);

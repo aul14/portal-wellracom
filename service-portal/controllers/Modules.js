@@ -1,4 +1,5 @@
 import Module from '../models/ModuleModel.js';
+import Permission from '../models/PermissionModel.js';
 import Validator from 'fastest-validator';
 import { checkUniqueness } from '../helpers/checkUnique.js';
 import { Op } from 'sequelize'
@@ -40,6 +41,26 @@ export const getModulesQuery = async (req, res) => {
     }
 }
 
+export const getModulesWithPermission = async (req, res) => {
+    try {
+        const response = await Module.findAll({
+            include: [{
+                model: Permission,
+                attributes: ['id', 'keyName', 'name']
+            }]
+        });
+
+        res.status(200).json({
+            status: 'success',
+            data: response
+        })
+    } catch (error) {
+        res.status(500).json({
+            status: 'error',
+            msg: error.message
+        })
+    }
+}
 export const getModules = async (req, res) => {
     try {
         const response = await Module.findAll();
