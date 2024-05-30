@@ -8,6 +8,32 @@ const {
 
 const api = apiAdapter(URL_SERVICE_PORTAL);
 
+export const getWithPermissions = async (req, res) => {
+    try {
+        const module = await api.get(`/modules/withpermissions`);
+        res.json(module.data);
+    } catch (error) {
+        if (error.code === 'ECONNREFUSED') {
+            return res.status(500).json({
+                status: 'error',
+                msg: 'service unavailable!'
+            })
+        }
+
+        if (error.response) {
+            // If error.response exists, destructure properties from it
+            const { status, data } = error.response;
+            return res.status(status).json(data);
+        } else {
+            // If error.response is undefined, handle the error accordingly
+            return res.status(500).json({
+                status: 'error',
+                msg: 'An unexpected error occurred.'
+            });
+        }
+    }
+}
+
 export const getAll = async (req, res) => {
     try {
         const modules = await api.get(`/modules`);

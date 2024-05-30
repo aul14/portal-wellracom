@@ -5,13 +5,15 @@ import {
     createRole,
     updateRole,
     deleteRole,
-    getRolesQuery
+    getRolesQuery,
+    getRoleByIdWithPermissions
 } from '../controllers/Roles.js';
 
 const router = express.Router();
 
 router.get('/roles/query', getRolesQuery);
 router.get('/roles', getRoles);
+router.get('/roles/withpermissions/:id', getRoleByIdWithPermissions);
 router.get('/roles/:id', getRoleById);
 router.post('/roles', createRole);
 router.put('/roles/:id', updateRole);

@@ -1,4 +1,5 @@
 import Role from '../models/RoleModel.js';
+import Permission from '../models/PermissionModel.js';
 import Validator from 'fastest-validator';
 import { Op } from 'sequelize';
 import { checkUniqueness } from '../helpers/checkUnique.js';
@@ -48,6 +49,50 @@ export const getRoles = async (req, res) => {
         res.status(200).json({
             status: 'success',
             data: response
+        })
+    } catch (error) {
+        res.status(500).json({
+            status: 'error',
+            msg: error.message
+        })
+    }
+}
+export const getRoleByIdWithPermissions = async (req, res) => {
+    try {
+        const role = await Role.findOne({
+            where: {
+                id: req.params.id
+            },
+            include: [{
+                model: Permission,
+                attributes: ['id', 'keyName', 'name']
+            }],
+        });
+
+        if (!role) {
+            return res.status(404).json({
+                status: 'error',
+                msg: 'Role not found!'
+            })
+        }
+
+        const responseData = {
+            id: role.id,
+            name: role.name,
+            description: role.description,
+            createdAt: role.createdAt,
+            updatedAt: role.updatedAt,
+            permissions: role.permissions.map(permission => ({
+                id: permission.id,
+                keyName: permission.keyName,
+                name: permission.name
+            }))
+        };
+
+
+        res.status(200).json({
+            status: 'success',
+            data: responseData
         })
     } catch (error) {
         res.status(500).json({

@@ -62,6 +62,32 @@ export const getQuery = async (req, res) => {
         }
     }
 }
+export const getWithPermissions = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const role = await api.get(`/roles/withpermissions/${id}`);
+        res.json(role.data);
+    } catch (error) {
+        if (error.code === 'ECONNREFUSED') {
+            return res.status(500).json({
+                status: 'error',
+                msg: 'service unavailable!'
+            })
+        }
+
+        if (error.response) {
+            // If error.response exists, destructure properties from it
+            const { status, data } = error.response;
+            return res.status(status).json(data);
+        } else {
+            // If error.response is undefined, handle the error accordingly
+            return res.status(500).json({
+                status: 'error',
+                msg: 'An unexpected error occurred.'
+            });
+        }
+    }
+}
 export const get = async (req, res) => {
     try {
         const { id } = req.params;

@@ -5,12 +5,14 @@ import {
     getQuery,
     create,
     update,
-    destroy
+    destroy,
+    getWithPermissions
 } from './handler/roles/roleHandler.js';
 import { checkPermissions } from '../middlewares/permissions.js';
 
 const router = express.Router();
 
+router.get('/withpermissions/:id', getWithPermissions);
 router.get('/', checkPermissions('manage-role'), getAll);
 router.get('/query', checkPermissions('manage-role'), getQuery);
 router.get('/:id', checkPermissions('manage-role'), get);

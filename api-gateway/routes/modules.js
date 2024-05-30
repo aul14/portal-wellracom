@@ -5,12 +5,14 @@ import {
     getQuery,
     create,
     update,
-    destroy
+    destroy,
+    getWithPermissions
 } from './handler/modules/moduleHandler.js';
 import { checkPermissions } from '../middlewares/permissions.js';
 
 const router = express.Router();
 
+router.get('/withpermissions', getWithPermissions);
 router.get('/', checkPermissions('manage-module'), getAll);
 router.get('/query', checkPermissions('manage-module'), getQuery);
 router.get('/:id', checkPermissions('manage-module'), get);
