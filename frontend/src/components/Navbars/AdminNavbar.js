@@ -18,7 +18,7 @@ const AdminNavbar = (props) => {
   let newUrlImage;
   if (userData.data.urlAvatar) {
     let originalUrl = userData.data.urlAvatar;
-    let newBaseUrl = process.env.REACT_APP_URL_SERVICE_PORTAL_OUT;
+    let newBaseUrl = process.env.REACT_APP_API_BASE_URL;
     let urlParts = originalUrl.split('/');
     let protocolAndHost = urlParts[0] + '//' + urlParts[2];
     newUrlImage = originalUrl.replace(protocolAndHost, newBaseUrl);

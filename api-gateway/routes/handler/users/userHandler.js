@@ -4,7 +4,7 @@ dotenv.config()
 
 const {
     URL_SERVICE_PORTAL,
-    URL_SERVICE_PORTAL_OUT
+    HOSTNAME
 } = process.env;
 
 const api = apiAdapter(URL_SERVICE_PORTAL);
@@ -42,7 +42,7 @@ export const getQuery = async (req, res) => {
             }
         });
         const response = users.data
-        const newBaseUrl = URL_SERVICE_PORTAL_OUT;
+        const newBaseUrl = HOSTNAME;
         if (Array.isArray(response.data)) {
             response.data.forEach(user => {
                 if (user.url_avatar) {
