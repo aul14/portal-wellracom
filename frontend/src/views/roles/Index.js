@@ -82,7 +82,7 @@ const Index = () => {
                 <div>
                     <Link to={`/admin/roles/edit/${row.id}`} className='btn btn-sm btn-info' title='Edit'><i className='fa fa-edit'></i></Link>{''}
                     <Button onClick={() => deleteData(row.id)} color="danger" size="sm" title='Delete'><i className='fa fa-trash'></i></Button>{''}
-                    <Link to={`#`} className='btn btn-sm btn-warning' title='Role Access'><i className='fa fa-key'></i></Link>
+                    <Link to={`/admin/roles/role-access/${row.id}`} className='btn btn-sm btn-warning' title='Role Access'><i className='fa fa-key'></i></Link>
                 </div>
             ),
             button: true,

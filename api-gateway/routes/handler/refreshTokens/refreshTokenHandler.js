@@ -26,7 +26,7 @@ export const refreshToken = async (req, res) => {
         // cek refresh token dari service-user refres token
         await api.get('/refresh_tokens', { params: { refreshToken: refreshToken } });
 
-        jwt.verify(refreshToken, JWT_SECRET_REFRESH_TOKEN, (err, decoded) => {
+        jwt.verify(refreshToken, JWT_SECRET_REFRESH_TOKEN, async (err, decoded) => {
             if (err) {
                 return res.status(403).json({
                     status: 'error',
@@ -34,7 +34,19 @@ export const refreshToken = async (req, res) => {
                 })
             }
 
-            const accessToken = jwt.sign({ data: decoded.data }, JWT_SECRET, { expiresIn: JWT_ACCESS_TOKEN_EXPIRED });
+            const getUser = await api.get(`/users/${decoded.data.id}`);
+
+            const newUserData = {
+                id: getUser.data.data.id,
+                name: getUser.data.data.name,
+                username: getUser.data.data.username,
+                email: getUser.data.data.email,
+                urlAvatar: getUser.data.data.url_avatar,
+                role: getUser.data.data.role
+            }
+
+
+            const accessToken = jwt.sign({ data: newUserData }, JWT_SECRET, { expiresIn: JWT_ACCESS_TOKEN_EXPIRED });
 
             res.json({
                 status: 'success',

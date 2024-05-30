@@ -14,7 +14,7 @@ import {
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import Header from "components/Headers/Header.js";
-import ErrorAlerts from 'components/ErrorAlerts.js';
+import ErrorAlerts from 'components/alerts/ErrorAlerts.js';
 import axiosInstance from 'app/axiosInstance.js';
 
 const Create = () => {

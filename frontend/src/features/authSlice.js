@@ -54,6 +54,7 @@ export const RefreshToken = createAsyncThunk("user/RefreshToken", async (_, thun
         });
 
         const token = response.data.data.accessToken;
+
         // Update the token in local storage
         localStorage.setItem('token', JSON.stringify(token));
 

@@ -1,5 +1,6 @@
 import User from '../models/UserModel.js';
 import Role from '../models/RoleModel.js';
+import Permission from '../models/PermissionModel.js';
 import { Op } from 'sequelize'
 import argon2 from 'argon2';
 import Validator from 'fastest-validator';
@@ -84,7 +85,13 @@ export const getUserById = async (req, res) => {
             },
             include: [{
                 model: Role,
-                attributes: ['id', 'name', 'description']
+                attributes: ['id', 'name'],
+                include: [
+                    {
+                        model: Permission,
+                        attributes: ['id', 'keyName', 'name']
+                    }
+                ]
             }]
         });
 

@@ -28,7 +28,7 @@ export const Login = async (req, res) => {
             },
             include: [{
                 model: Role,
-                attributes: ['id', 'name', 'description'],
+                attributes: ['id', 'name'],
                 include: [
                     {
                         model: Permission,
