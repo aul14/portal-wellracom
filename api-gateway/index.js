@@ -1,6 +1,7 @@
 import express from 'express';
 import FileUpload from 'express-fileupload';
 import cookieParser from 'cookie-parser';
+import httpProxy from 'http-proxy';
 import cors from 'cors';
 import logger from 'morgan'
 import dotenv from 'dotenv';
@@ -17,6 +18,10 @@ import refreshTokensRoute from './routes/refreshToken.js';
 import { verifyToken } from './middlewares/verifyToken.js';
 
 const app = express();
+
+const proxy = httpProxy.createProxyServer();
+
+const { URL_SERVICE_PORTAL } = process.env;
 
 app.use(cors({
     credentials: true,
@@ -37,6 +42,11 @@ app.use('/modules', verifyToken, modulesRoute);
 app.use('/permissions', verifyToken, permissionsRoute);
 app.use('/access-control', verifyToken, permissionsRolesRoute);
 app.use('/refresh-tokens', verifyToken, refreshTokensRoute);
+
+// Route untuk mendapatkan gambar dari service user
+app.get('/images/:imageName', (req, res) => {
+    proxy.web(req, res, { target: `${URL_SERVICE_PORTAL}` });
+});
 
 app.listen(process.env.APP_PORT, () => {
     console.log(`Server up and running...`);
