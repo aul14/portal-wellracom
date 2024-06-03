@@ -23,7 +23,7 @@ import {
 } from "reactstrap";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, reset } from '../../features/authSlice.js';
+import { LogOut, reset } from 'features/authSlice.js';
 
 var ps;
 

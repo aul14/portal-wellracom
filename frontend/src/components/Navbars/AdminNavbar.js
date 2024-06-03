@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // reactstrap components
 import {
   DropdownMenu,
@@ -12,6 +12,8 @@ import {
 } from "reactstrap";
 
 import { jwtDecode } from 'jwt-decode';
+import { useDispatch } from "react-redux";
+import { LogOut, reset } from 'features/authSlice.js';
 
 const AdminNavbar = (props) => {
   const userData = jwtDecode(localStorage.getItem('token').replace(/["']/g, ""));
@@ -24,6 +26,14 @@ const AdminNavbar = (props) => {
     newUrlImage = originalUrl.replace(protocolAndHost, newBaseUrl);
   } else {
     newUrlImage = null;
+  }
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const logout = () => {
+    dispatch(LogOut());
+    dispatch(reset());
+    navigate("/auth/login");
   }
 
   return (
@@ -64,7 +74,7 @@ const AdminNavbar = (props) => {
                   <i className="ni ni-circle-08" />
                   <span>User Profile</span>
                 </DropdownItem>
-                <DropdownItem href="#">
+                <DropdownItem href="#" onClick={logout}>
                   <i className="ni ni-button-power" />
                   <span>Logout</span>
                 </DropdownItem>
