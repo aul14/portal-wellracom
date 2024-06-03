@@ -23,6 +23,8 @@ import RoleAccess from 'views/roles/RoleAccess.js';
 import Users from 'views/users/Index.js';
 import CreateUser from 'views/users/Create.js';
 import EditUser from 'views/users/Edit.js';
+import IndexCuti from 'views/form/cuti/Index.js';
+import SidebarCuti from 'views/form/cuti/SidebarCuti.js';
 
 const tokenExp = process.env.REACT_APP_TOKEN_EXPIRY;
 
@@ -47,9 +49,12 @@ const Admin = () => {
     };
   }, [location]);
 
+  const isCutiPage = location.pathname === "/admin/cuti";
+
   return (
     <>
       <Sidebar />
+      {isCutiPage ? <SidebarCuti /> : <Sidebar />}
       <div className="main-content" ref={mainContent}>
         <AdminNavbar />
         <Routes>
@@ -68,6 +73,7 @@ const Admin = () => {
           <Route path="/users" element={<Users />} />
           <Route path="/users/add" element={<CreateUser />} />
           <Route path="/users/edit/:id" element={<EditUser />} />
+          <Route path="/cuti" element={<IndexCuti />} />
         </Routes>
         <Container fluid>
           <AdminFooter />

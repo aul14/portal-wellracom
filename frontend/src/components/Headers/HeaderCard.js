@@ -33,7 +33,7 @@ const Header = () => {
                                     </CardBody>
                                     <CardFooter>
                                         <p className="mt-3 mb-0 text-muted text-sm">
-                                            <Link to="#" className="text-reset"><span>Lihat selengkapnya...</span></Link>
+                                            <Link to={"/admin/cuti"} className="text-reset"><span>Lihat selengkapnya...</span></Link>
                                         </p>
                                     </CardFooter>
                                 </Card>
