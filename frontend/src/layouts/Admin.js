@@ -77,9 +77,4 @@ const Admin = () => {
   );
 };
 
-const AdminHome = () => {
-  return <div>Welcome to the Admin Dashboard</div>;
-};
-
 export default Admin;
-export { AdminHome };
