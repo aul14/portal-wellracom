@@ -20,8 +20,7 @@ const Header = () => {
                                             <div className="col">
                                                 <CardTitle
                                                     tag="h2"
-                                                    className="text-uppercase text-muted mb-0"
-                                                >
+                                                    className="text-uppercase text-muted mb-0">
                                                     Form Cuti
                                                 </CardTitle>
                                             </div>
@@ -49,8 +48,7 @@ const Header = () => {
                                             <div className="col">
                                                 <CardTitle
                                                     tag="h2"
-                                                    className="text-uppercase text-muted mb-0"
-                                                >
+                                                    className="text-uppercase text-muted mb-0">
                                                     Form Rembes
                                                 </CardTitle>
                                             </div>
@@ -78,8 +76,7 @@ const Header = () => {
                                             <div className="col">
                                                 <CardTitle
                                                     tag="h2"
-                                                    className="text-uppercase text-muted mb-0"
-                                                >
+                                                    className="text-uppercase text-muted mb-0">
                                                     Form Booking Mobil
                                                 </CardTitle>
                                             </div>
