@@ -18,7 +18,6 @@ import argon2 from 'argon2';
             { name: 'Permissions' },
             { name: 'Users Management' },
             { name: 'Roles' },
-            { name: 'Sisa Cuti' },
             { name: 'Pengajuan Cuti' },
             { name: 'Menunggu Approval Cuti' },
             { name: 'History Cuti' },
@@ -71,19 +70,15 @@ import argon2 from 'argon2';
             { keyName: 'edit-role', name: 'Edit Role', description: 'Boleh Edit Role', moduleId: 5 },
             { keyName: 'delete-role', name: 'Delete Role', description: 'Boleh Delete Role', moduleId: 5 },
             { keyName: 'manage-role-access', name: 'Manage Role Access', description: 'Boleh Manage Role Access', moduleId: 5 },
-            { keyName: 'manage-sisa-cuti', name: 'Manage Sisa Cuti', description: 'Boleh manage sisa cuti', moduleId: 6 },
-            { keyName: 'create-sisa-cuti', name: 'Create Sisa Cuti', description: 'Boleh create sisa cuti', moduleId: 6 },
-            { keyName: 'edit-sisa-cuti', name: 'Edit Sisa Cuti', description: 'Boleh edit sisa cuti', moduleId: 6 },
-            { keyName: 'delete-sisa-cuti', name: 'Delete Sisa Cuti', description: 'Boleh delete sisa cuti', moduleId: 6 },
-            { keyName: 'manage-pengajuan-cuti', name: 'Manage Pengajuan Cuti', description: 'Boleh manage pengajuan cuti', moduleId: 7 },
-            { keyName: 'create-pengajuan-cuti', name: 'Create Pengajuan Cuti', description: 'Boleh create pengajuan cuti', moduleId: 7 },
-            { keyName: 'edit-pengajuan-cuti', name: 'Edit Pengajuan Cuti', description: 'Boleh edit pengajuan cuti', moduleId: 7 },
-            { keyName: 'delete-pengajuan-cuti', name: 'Delete Pengajuan Cuti', description: 'Boleh delete pengajuan cuti', moduleId: 7 },
-            { keyName: 'manage-approval-cuti', name: 'Manage Approval Cuti', description: 'Boleh manage approval cuti', moduleId: 8 },
-            { keyName: 'approved-cuti', name: 'Approved Cuti', description: 'Akses untuk mensetujui cuti', moduleId: 8 },
-            { keyName: 'not-approved-cuti', name: 'Not Approved Cuti', description: 'Akses untuk tidak mensetujui cuti', moduleId: 8 },
-            { keyName: 'show-status-pengajuan-cuti', name: 'Show Status Pengajuan Cuti', description: 'Boleh melihat pengajuan cuti dengan status pending, disetujui & tidak disetujui', moduleId: 7 },
-            { keyName: 'manage-history-cuti', name: 'Manage History Cuti', description: 'Boleh manage history cuti', moduleId: 9 },
+            { keyName: 'manage-pengajuan-cuti', name: 'Manage Pengajuan Cuti', description: 'Boleh manage pengajuan cuti', moduleId: 6 },
+            { keyName: 'create-pengajuan-cuti', name: 'Create Pengajuan Cuti', description: 'Boleh create pengajuan cuti', moduleId: 6 },
+            { keyName: 'edit-pengajuan-cuti', name: 'Edit Pengajuan Cuti', description: 'Boleh edit pengajuan cuti', moduleId: 6 },
+            { keyName: 'delete-pengajuan-cuti', name: 'Delete Pengajuan Cuti', description: 'Boleh delete pengajuan cuti', moduleId: 6 },
+            { keyName: 'manage-approval-cuti', name: 'Manage Approval Cuti', description: 'Boleh manage approval cuti', moduleId: 7 },
+            { keyName: 'approved-cuti', name: 'Approved Cuti', description: 'Akses untuk mensetujui cuti', moduleId: 7 },
+            { keyName: 'not-approved-cuti', name: 'Not Approved Cuti', description: 'Akses untuk tidak mensetujui cuti', moduleId: 7 },
+            { keyName: 'show-status-pengajuan-cuti', name: 'Show Status Pengajuan Cuti', description: 'Boleh melihat pengajuan cuti dengan status pending, disetujui & tidak disetujui', moduleId: 6 },
+            { keyName: 'manage-history-cuti', name: 'Manage History Cuti', description: 'Boleh manage history cuti', moduleId: 8 },
         ]);
 
         await PermissionsRoles.bulkCreate([
@@ -121,10 +116,6 @@ import argon2 from 'argon2';
             { permission_id: 30, role_id: 1 },
             { permission_id: 31, role_id: 1 },
             { permission_id: 32, role_id: 1 },
-            { permission_id: 33, role_id: 1 },
-            { permission_id: 34, role_id: 1 },
-            { permission_id: 35, role_id: 1 },
-            { permission_id: 36, role_id: 1 },
         ]);
 
         console.log("Database migration & seeded succesfully!");
