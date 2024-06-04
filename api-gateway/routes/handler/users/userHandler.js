@@ -115,7 +115,8 @@ export const create = async (req, res) => {
             'roleId',
             'dateStart',
             'dateEnd',
-            'telegramId'
+            'telegramId',
+            'haveCuti'
         ];
 
         // Loop through keysToAppend array and append to formData if corresponding property exists in req.body
@@ -179,7 +180,8 @@ export const update = async (req, res) => {
             'roleId',
             'dateStart',
             'dateEnd',
-            'telegramId'
+            'telegramId',
+            'haveCuti'
         ];
 
         // Loop through keysToAppend array and append to formData if corresponding property exists in req.body

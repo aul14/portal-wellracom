@@ -29,7 +29,7 @@ export const getUsersQuery = async (req, res) => {
             order: [['id', sortOrder]],
             limit: parseInt(length),
             offset: parseInt(start),
-            attributes: ['id', 'name', 'username', 'email', 'url_avatar', 'date_start', 'date_end', 'sisa_cuti', 'createdAt', 'updatedAt'],
+            attributes: ['id', 'name', 'username', 'email', 'url_avatar', 'date_start', 'date_end', 'have_cuti', 'sisa_cuti', 'createdAt', 'updatedAt'],
             include: [{
                 model: Role,
                 attributes: ['id', 'name'],
@@ -58,7 +58,7 @@ export const getUsersQuery = async (req, res) => {
 export const getUsers = async (req, res) => {
     try {
         const response = await User.findAll({
-            attributes: ['id', 'name', 'username', 'email', 'avatar', 'date_start', 'date_end', 'sisa_cuti', 'telegram_id', 'createdAt', 'updatedAt'],
+            attributes: ['id', 'name', 'username', 'email', 'avatar', 'date_start', 'date_end', 'have_cuti', 'sisa_cuti', 'telegram_id', 'createdAt', 'updatedAt'],
             include: [{
                 model: Role,
                 attributes: ['id', 'name', 'description']
@@ -79,7 +79,7 @@ export const getUsers = async (req, res) => {
 export const getUserById = async (req, res) => {
     try {
         const user = await User.findOne({
-            attributes: ['id', 'name', 'username', 'email', 'avatar', 'date_start', 'date_end', 'sisa_cuti', 'telegram_id', 'createdAt', 'updatedAt'],
+            attributes: ['id', 'name', 'username', 'email', 'avatar', 'date_start', 'date_end', 'have_cuti', 'sisa_cuti', 'telegram_id', 'createdAt', 'updatedAt'],
             where: {
                 id: req.params.id
             },
@@ -174,8 +174,10 @@ export const createUser = async (req, res) => {
         }
 
         let sisaCuti = 0;
-        if (strToBool(haveCuti)) {
-            sisaCuti = 12;
+        if (haveCuti) {
+            if (strToBool(haveCuti)) {
+                sisaCuti = 12;
+            }
         }
 
         const hashPassword = await argon2.hash(password);
@@ -216,6 +218,7 @@ export const createUser = async (req, res) => {
             });
         }
 
+
         const user = await User.create({
             username: username,
             name: name,
@@ -227,7 +230,7 @@ export const createUser = async (req, res) => {
             telegram_id: telegramId,
             avatar: fileName,
             url_avatar: url,
-            have_cuti: strToBool(haveCuti),
+            have_cuti: haveCuti ? strToBool(haveCuti) : false,
             sisa_cuti: sisaCuti
         });
 
@@ -343,12 +346,14 @@ export const updateUser = async (req, res) => {
         }
 
         let sisaCuti = 0;
-        if (strToBool(haveCuti) && user.have_cuti) {
-            sisaCuti = user.sisaCuti;
-        } else if (strToBool(haveCuti) && !user.have_cuti) {
-            sisaCuti = 12;
-        } else {
-            sisaCuti = 0;
+        if (haveCuti) {
+            if (strToBool(haveCuti) && user.have_cuti) {
+                sisaCuti = user.sisaCuti;
+            } else if (strToBool(haveCuti) && !user.have_cuti) {
+                sisaCuti = 12;
+            } else {
+                sisaCuti = 0;
+            }
         }
 
         let fileName, url;
@@ -403,7 +408,7 @@ export const updateUser = async (req, res) => {
             telegram_id: telegramId,
             avatar: fileName,
             url_avatar: url,
-            have_cuti: strToBool(haveCuti),
+            have_cuti: haveCuti ? strToBool(haveCuti) : false,
             sisa_cuti: sisaCuti
         });
 

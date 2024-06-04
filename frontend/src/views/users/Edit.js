@@ -18,7 +18,7 @@ import ErrorAlerts from 'components/alerts/ErrorAlerts.js';
 import axiosInstance from 'app/axiosInstance.js';
 import Select from 'react-select';
 
-const Create = () => {
+const Edit = () => {
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
@@ -31,6 +31,7 @@ const Create = () => {
     const [dateEnd, setDateEnd] = useState("");
     const [telegramId, setTelegramId] = useState("");
     const [preview, setPreview] = useState("");
+    const [haveCuti, setHaveCuti] = useState("");
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
     const baseUrl = process.env.REACT_APP_API_BASE_URL;
@@ -46,6 +47,7 @@ const Create = () => {
                 setTelegramId(response.data.data.telegram_id);
                 setDateStart(response.data.data.date_start);
                 setDateEnd(response.data.data.date_end);
+                setHaveCuti(response.data.data.have_cuti);
                 setFile(response.data.data.avatar)
                 setSelectedRole(response.data.data.role.id
                     ? { value: response.data.data.role.id, label: response.data.data.role.name }
@@ -99,9 +101,10 @@ const Create = () => {
             formData.append("password", password)
             formData.append("confPassword", confPassword)
             formData.append("roleId", selectedRole && selectedRole.value)
-            formData.append("date_start", dateStart)
-            formData.append("date_end", dateEnd)
-            formData.append("telegram_id", telegramId)
+            formData.append("dateStart", dateStart)
+            formData.append("dateEnd", dateEnd)
+            formData.append("telegramId", telegramId)
+            formData.append("haveCuti", haveCuti)
 
             await axiosInstance.put(`${baseUrl}/users/${id}`, formData, {
                 headers: {
@@ -134,19 +137,19 @@ const Create = () => {
                                     <div className="row">
                                         <div className="col-md-6">
                                             <FormGroup row>
-                                                <Label sm={4}>Name</Label>
+                                                <Label sm={4}>Name <span className="text-danger">*</span></Label>
                                                 <Col sm={8}>
                                                     <Input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup row>
-                                                <Label sm={4}>Username</Label>
+                                                <Label sm={4}>Username <span className="text-danger">*</span></Label>
                                                 <Col sm={8}>
                                                     <Input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup row>
-                                                <Label sm={4}>Email</Label>
+                                                <Label sm={4}>Email <span className="text-danger">*</span></Label>
                                                 <Col sm={8}>
                                                     <Input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                                                 </Col>
@@ -163,10 +166,28 @@ const Create = () => {
                                                     <Input type="password" placeholder="Confirm Password" value={confPassword} onChange={(e) => setConfPassword(e.target.value)} />
                                                 </Col>
                                             </FormGroup>
+                                            <FormGroup row>
+                                                <Label sm={4}></Label>
+                                                <Col sm={8}>
+                                                    <div className="custom-control custom-checkbox">
+                                                        <Input
+                                                            className="custom-control-input"
+                                                            id="customCheck"
+                                                            checked={haveCuti}
+                                                            onChange={(e) => setHaveCuti(e.target.checked)}
+                                                            type="checkbox" />
+                                                        <Label
+                                                            className="custom-control-label"
+                                                            htmlFor="customCheck">
+                                                            Have a cuti?
+                                                        </Label>
+                                                    </div>
+                                                </Col>
+                                            </FormGroup>
                                         </div>
                                         <div className="col-md-6">
                                             <FormGroup row>
-                                                <Label sm={4}>Role</Label>
+                                                <Label sm={4}>Role <span className="text-danger">*</span></Label>
                                                 <Col sm={8}>
                                                     <Select
                                                         options={selectOptions}
@@ -225,4 +246,4 @@ const Create = () => {
     )
 }
 
-export default Create
+export default Edit

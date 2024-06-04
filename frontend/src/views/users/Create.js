@@ -31,6 +31,7 @@ const Create = () => {
     const [dateEnd, setDateEnd] = useState("");
     const [telegramId, setTelegramId] = useState("");
     const [preview, setPreview] = useState("");
+    const [haveCuti, setHaveCuti] = useState("");
     const [errors, setErrors] = useState([]);
     const navigate = useNavigate();
     const baseUrl = process.env.REACT_APP_API_BASE_URL;
@@ -74,9 +75,10 @@ const Create = () => {
             formData.append("password", password)
             formData.append("confPassword", confPassword)
             formData.append("roleId", selectedRole && selectedRole.value)
-            formData.append("date_start", dateStart)
-            formData.append("date_end", dateEnd)
-            formData.append("telegram_id", telegramId)
+            formData.append("dateStart", dateStart)
+            formData.append("dateEnd", dateEnd)
+            formData.append("telegramId", telegramId)
+            formData.append("haveCuti", haveCuti)
 
             await axiosInstance.post(`${baseUrl}/users`, formData, {
                 headers: {
@@ -109,39 +111,57 @@ const Create = () => {
                                     <div className="row">
                                         <div className="col-md-6">
                                             <FormGroup row>
-                                                <Label sm={4}>Name</Label>
+                                                <Label sm={4}>Name <span className="text-danger">*</span></Label>
                                                 <Col sm={8}>
                                                     <Input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup row>
-                                                <Label sm={4}>Username</Label>
+                                                <Label sm={4}>Username <span className="text-danger">*</span></Label>
                                                 <Col sm={8}>
                                                     <Input type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup row>
-                                                <Label sm={4}>Email</Label>
+                                                <Label sm={4}>Email <span className="text-danger">*</span></Label>
                                                 <Col sm={8}>
                                                     <Input type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup row>
-                                                <Label sm={4}>Password</Label>
+                                                <Label sm={4}>Password <span className="text-danger">*</span></Label>
                                                 <Col sm={8}>
                                                     <Input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup row>
-                                                <Label sm={4}>Confirm Password</Label>
+                                                <Label sm={4}>Confirm Password <span className="text-danger">*</span></Label>
                                                 <Col sm={8}>
                                                     <Input type="password" placeholder="Confirm Password" value={confPassword} onChange={(e) => setConfPassword(e.target.value)} />
+                                                </Col>
+                                            </FormGroup>
+                                            <FormGroup row>
+                                                <Label sm={4}></Label>
+                                                <Col sm={8}>
+                                                    <div className="custom-control custom-checkbox">
+                                                        <Input
+                                                            className="custom-control-input"
+                                                            id="customCheck"
+                                                            checked={haveCuti}
+                                                            onChange={(e) => setHaveCuti(e.target.checked)}
+                                                            type="checkbox" />
+                                                        <Label
+                                                            className="custom-control-label"
+                                                            htmlFor="customCheck">
+                                                            Have a cuti?
+                                                        </Label>
+                                                    </div>
                                                 </Col>
                                             </FormGroup>
                                         </div>
                                         <div className="col-md-6">
                                             <FormGroup row>
-                                                <Label sm={4}>Role</Label>
+                                                <Label sm={4}>Role <span className="text-danger">*</span></Label>
                                                 <Col sm={8}>
                                                     <Select
                                                         options={selectOptions}

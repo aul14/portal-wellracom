@@ -106,13 +106,13 @@ const Edit = () => {
                                     <div className="row">
                                         <div className="col-md-6">
                                             <FormGroup row>
-                                                <Label sm={3}>Key Name</Label>
+                                                <Label sm={3}>Key Name <span className="text-danger">*</span></Label>
                                                 <Col sm={9}>
                                                     <Input type="text" placeholder="Key Name" value={keyName} onChange={(e) => setKeyName(e.target.value)} />
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup row>
-                                                <Label sm={3}>Name</Label>
+                                                <Label sm={3}>Name <span className="text-danger">*</span></Label>
                                                 <Col sm={9}>
                                                     <Input type="text" placeholder="Name" value={name} onChange={(e) => setName(e.target.value)} />
                                                 </Col>
@@ -126,7 +126,7 @@ const Edit = () => {
                                                 </Col>
                                             </FormGroup>
                                             <FormGroup row>
-                                                <Label sm={3}>Module</Label>
+                                                <Label sm={3}>Module <span className="text-danger">*</span></Label>
                                                 <Col sm={9}>
                                                     <Select
                                                         options={selectOptions}

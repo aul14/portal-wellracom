@@ -136,12 +136,6 @@ const Sidebar = (props) => {
                     <Nav className="md-3" navbar>
                         <NavItem>
                             <NavLink to="#" tag={NavLinkRRD}>
-                                <i className="ni ni-archive-2" />
-                                List Sisa Cuti
-                            </NavLink>
-                        </NavItem>
-                        <NavItem>
-                            <NavLink to="#" tag={NavLinkRRD}>
                                 <i className="fas fa-book" />
                                 List Pengajuan Cuti
                             </NavLink>

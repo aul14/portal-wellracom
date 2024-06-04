@@ -116,6 +116,11 @@ const Index = () => {
             sortable: true
         },
         {
+            name: 'Total Cuti',
+            selector: row => row.sisa_cuti,
+            sortable: true
+        },
+        {
             name: 'Updated At',
             selector: row => format(new Date(row.updatedAt), 'dd/MM/yyyy HH:ii'),
             sortable: true
