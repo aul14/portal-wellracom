@@ -29,7 +29,7 @@ export const getUsersQuery = async (req, res) => {
             order: [['id', sortOrder]],
             limit: parseInt(length),
             offset: parseInt(start),
-            attributes: ['id', 'name', 'username', 'email', 'url_avatar', 'date_start', 'date_end', 'createdAt', 'updatedAt'],
+            attributes: ['id', 'name', 'username', 'email', 'url_avatar', 'date_start', 'date_end', 'sisa_cuti', 'createdAt', 'updatedAt'],
             include: [{
                 model: Role,
                 attributes: ['id', 'name'],
@@ -58,7 +58,7 @@ export const getUsersQuery = async (req, res) => {
 export const getUsers = async (req, res) => {
     try {
         const response = await User.findAll({
-            attributes: ['id', 'name', 'username', 'email', 'avatar', 'date_start', 'date_end', 'telegram_id', 'createdAt', 'updatedAt'],
+            attributes: ['id', 'name', 'username', 'email', 'avatar', 'date_start', 'date_end', 'sisa_cuti', 'telegram_id', 'createdAt', 'updatedAt'],
             include: [{
                 model: Role,
                 attributes: ['id', 'name', 'description']
@@ -79,7 +79,7 @@ export const getUsers = async (req, res) => {
 export const getUserById = async (req, res) => {
     try {
         const user = await User.findOne({
-            attributes: ['id', 'name', 'username', 'email', 'avatar', 'date_start', 'date_end', 'telegram_id', 'createdAt', 'updatedAt'],
+            attributes: ['id', 'name', 'username', 'email', 'avatar', 'date_start', 'date_end', 'sisa_cuti', 'telegram_id', 'createdAt', 'updatedAt'],
             where: {
                 id: req.params.id
             },
@@ -135,7 +135,7 @@ export const createUser = async (req, res) => {
             })
         }
 
-        const { name, username, email, password, confPassword, roleId, dateStart, dateEnd, telegramId } = req.body;
+        const { name, username, email, password, confPassword, roleId, dateStart, dateEnd, telegramId, haveCuti } = req.body;
 
         if (password !== confPassword) {
             return res.status(400).json({
@@ -171,6 +171,11 @@ export const createUser = async (req, res) => {
                     msg: 'Role is not found'
                 })
             }
+        }
+
+        let sisaCuti = 0;
+        if (strToBool(haveCuti)) {
+            sisaCuti = 12;
         }
 
         const hashPassword = await argon2.hash(password);
@@ -222,6 +227,8 @@ export const createUser = async (req, res) => {
             telegram_id: telegramId,
             avatar: fileName,
             url_avatar: url,
+            have_cuti: strToBool(haveCuti),
+            sisa_cuti: sisaCuti
         });
 
         res.status(201).json({
@@ -237,6 +244,8 @@ export const createUser = async (req, res) => {
                 telegram_id: user.telegram_id,
                 avatar: user.avatar,
                 url_avatar: user.url_avatar,
+                have_cuti: user.have_cuti,
+                total_cuti: user.sisa_cuti,
             }
         });
 
@@ -282,7 +291,7 @@ export const updateUser = async (req, res) => {
             })
         }
 
-        const { name, username, email, password, confPassword, roleId, dateStart, dateEnd, telegramId } = req.body;
+        const { name, username, email, password, confPassword, roleId, dateStart, dateEnd, telegramId, haveCuti } = req.body;
 
         let hashPassword;
         if (password === "" || password == null) {
@@ -331,6 +340,15 @@ export const updateUser = async (req, res) => {
                     msg: 'Role is not found'
                 })
             }
+        }
+
+        let sisaCuti = 0;
+        if (strToBool(haveCuti) && user.have_cuti) {
+            sisaCuti = user.sisaCuti;
+        } else if (strToBool(haveCuti) && !user.have_cuti) {
+            sisaCuti = 12;
+        } else {
+            sisaCuti = 0;
         }
 
         let fileName, url;
@@ -385,6 +403,8 @@ export const updateUser = async (req, res) => {
             telegram_id: telegramId,
             avatar: fileName,
             url_avatar: url,
+            have_cuti: strToBool(haveCuti),
+            sisa_cuti: sisaCuti
         });
 
         res.status(200).json({
@@ -400,6 +420,8 @@ export const updateUser = async (req, res) => {
                 telegram_id: response_user.telegram_id,
                 avatar: response_user.avatar,
                 url_avatar: response_user.url_avatar,
+                have_cuti: response_user.have_cuti,
+                total_cuti: response_user.sisa_cuti,
             }
         })
 
@@ -442,4 +464,7 @@ export const deleteUser = async (req, res) => {
             msg: error.message
         })
     }
+}
+const strToBool = (s) => {
+    return ['true', '1', 't', 'y', 'yes'].includes(s.toLowerCase());
 }
