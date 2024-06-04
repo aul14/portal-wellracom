@@ -33,7 +33,7 @@ const Permissions = db.define('permissions', {
         type: DataTypes.STRING,
         allowNull: true
     },
-    moduleId: {
+    module_id: {
         type: DataTypes.INTEGER,
         allowNull: false,
         validate: {
@@ -44,7 +44,7 @@ const Permissions = db.define('permissions', {
     freezeTableName: true
 })
 
-Modules.hasMany(Permissions)
-Permissions.belongsTo(Modules, { foreignKey: 'moduleId' })
+Modules.hasMany(Permissions, { foreignKey: 'module_id' });
+Permissions.belongsTo(Modules, { foreignKey: 'module_id' });
 
 export default Permissions

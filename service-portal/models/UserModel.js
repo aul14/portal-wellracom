@@ -58,7 +58,17 @@ const Users = db.define('users', {
     },
     date_end: {
         type: DataTypes.DATEONLY,
-        allowNull: true
+        allowNull: true,
+    },
+    have_cuti: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
+    },
+    sisa_cuti: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
     },
     telegram_id: {
         type: DataTypes.STRING,
@@ -75,7 +85,7 @@ const Users = db.define('users', {
     freezeTableName: true
 })
 
-Role.hasMany(Users)
+Role.hasMany(Users, { foreignKey: 'role_id' })
 Users.belongsTo(Role, { foreignKey: 'role_id' })
 
 export default Users

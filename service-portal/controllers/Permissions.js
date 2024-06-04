@@ -142,7 +142,7 @@ export const createPermission = async (req, res) => {
             keyName: keyName,
             name: name,
             description: description,
-            moduleId: moduleId
+            module_id: moduleId
         });
 
         res.status(201).json({
@@ -217,7 +217,7 @@ export const updatePermission = async (req, res) => {
             keyName: keyName,
             name: name,
             description: description,
-            moduleId: moduleId
+            module_id: moduleId
         });
 
         res.status(200).json({

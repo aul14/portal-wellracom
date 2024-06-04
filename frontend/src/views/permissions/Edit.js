@@ -37,8 +37,8 @@ const Edit = () => {
                 setKeyName(response.data.data.keyName);
                 setName(response.data.data.name);
                 setDescription(response.data.data.description);
-                setSelectedModule(response.data.data.moduleId
-                    ? { value: response.data.data.moduleId, label: response.data.data.module.name }
+                setSelectedModule(response.data.data.module_id
+                    ? { value: response.data.data.module_id, label: response.data.data.module.name }
                     : "")
 
             } catch (error) {

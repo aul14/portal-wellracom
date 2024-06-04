@@ -231,7 +231,7 @@ export const createUser = async (req, res) => {
                 username: user.username,
                 name: user.name,
                 email: user.email,
-                roleId: user.roleId,
+                role_id: user.role_id,
                 date_start: user.date_start,
                 date_end: user.date_end,
                 telegram_id: user.telegram_id,
@@ -298,8 +298,8 @@ export const updateUser = async (req, res) => {
             })
         }
 
-        if (req.body.username) {
-            if (await checkUniqueness(User, 'username', req.body.username) && req.body.username !== user.username) {
+        if (username) {
+            if (await checkUniqueness(User, 'username', username) && username !== user.username) {
                 return res.status(400).json({
                     status: 'error',
                     msg: 'Username is already exist'
@@ -308,8 +308,8 @@ export const updateUser = async (req, res) => {
             }
         }
 
-        if (req.body.email) {
-            if (await checkUniqueness(User, 'email', req.body.email) && req.body.email !== user.email) {
+        if (email) {
+            if (await checkUniqueness(User, 'email', email) && email !== user.email) {
                 return res.status(400).json({
                     status: 'error',
                     msg: 'Email is already exist'
@@ -318,10 +318,10 @@ export const updateUser = async (req, res) => {
             }
         }
 
-        if (req.body.roleId) {
+        if (roleId) {
             const checkRole = await Role.findOne({
                 where: {
-                    id: req.body.roleId
+                    id: roleId
                 }
             });
 
@@ -394,7 +394,7 @@ export const updateUser = async (req, res) => {
                 username: response_user.username,
                 name: response_user.name,
                 email: response_user.email,
-                roleId: response_user.roleId,
+                role_id: response_user.roleId,
                 date_start: response_user.date_start,
                 date_end: response_user.date_end,
                 telegram_id: response_user.telegram_id,
