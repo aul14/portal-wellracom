@@ -23,14 +23,13 @@ import {
 } from "reactstrap";
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, reset } from 'features/authSlice.js';
+import { LogOut, reset } from 'features/AuthSlice';
 
 var ps;
 
 const Sidebar = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.auth);
 
   const logout = () => {
     dispatch(LogOut());

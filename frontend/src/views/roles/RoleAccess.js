@@ -18,7 +18,7 @@ import ErrorAlerts from 'components/alerts/ErrorAlerts.js';
 import SuccessAlerts from 'components/alerts/SuccessAlerts.js';
 import axiosInstance from 'app/axiosInstance.js';
 import { useDispatch } from "react-redux";
-import { RefreshToken } from 'features/authSlice.js';
+import { RefreshToken } from 'features/AuthSlice';
 
 const RoleAccess = () => {
     const { id } = useParams();

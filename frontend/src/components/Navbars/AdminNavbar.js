@@ -13,7 +13,7 @@ import {
 
 import { jwtDecode } from 'jwt-decode';
 import { useDispatch } from "react-redux";
-import { LogOut, reset } from 'features/authSlice.js';
+import { LogOut, reset } from 'features/AuthSlice';
 
 const AdminNavbar = (props) => {
   const userData = jwtDecode(localStorage.getItem('token').replace(/["']/g, ""));

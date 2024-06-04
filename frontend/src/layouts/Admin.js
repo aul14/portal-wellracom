@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation, Route, Routes } from "react-router-dom";
-import { checkExpToken } from 'features/checkExpToken.js';
+import { CheckExpToken } from 'features/CheckExpToken.js';
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
@@ -34,9 +34,9 @@ const Admin = () => {
 
   useEffect(() => {
     // Mulai interval untuk memeriksa dan memperbarui token
-    // checkExpToken();
+    // CheckExpToken();
     const intervalId = setInterval(() => {
-      checkExpToken();
+      CheckExpToken();
     }, parseInt(tokenExp) * 60 * 1000); // miliseconds
 
     document.documentElement.scrollTop = 0;

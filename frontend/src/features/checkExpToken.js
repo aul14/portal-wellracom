@@ -1,7 +1,7 @@
 import { store } from '../app/store.js';
-import { RefreshToken } from './authSlice.js';
+import { RefreshToken } from './AuthSlice.js';
 
-export const checkExpToken = async () => {
+export const CheckExpToken = async () => {
     const tokenLocal = localStorage.getItem('token').replace(/["']/g, "");
     if (!tokenLocal) return;
 
