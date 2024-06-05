@@ -9,7 +9,7 @@
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Aulia Rahman",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.6.8",

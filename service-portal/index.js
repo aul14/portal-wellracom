@@ -19,7 +19,7 @@ moment.tz.setDefault('Asia/Jakarta');
 
 app.use(cors({
     credentials: true,
-    origin: [`http://localhost:${process.env.APP_PORT}`]
+    origin: [`${process.env.HOSTNAME}`]
 }))
 
 app.use(express.json({ limit: '50mb' }));
