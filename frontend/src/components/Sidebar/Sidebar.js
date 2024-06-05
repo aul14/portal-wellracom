@@ -24,12 +24,11 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { LogOut, reset } from 'features/AuthSlice';
-
-var ps;
-
+import { hasPermission } from 'features/PermissionUtils'
 const Sidebar = (props) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const userPermissions = useSelector(state => state.permissions.permissions);
 
   const logout = () => {
     dispatch(LogOut());
@@ -148,24 +147,32 @@ const Sidebar = (props) => {
           {/* Navigation */}
           <Nav className="mb-md-3" navbar>
             <NavItem>
-              <NavLink to="/admin/modules" tag={NavLinkRRD}>
-                <i className="ni ni-planet" />
-                Modules
-              </NavLink>
-              <NavLink to="/admin/permissions" tag={NavLinkRRD}>
-                <i className="ni ni-key-25" />
-                Permissions
-              </NavLink>
-              <NavLink to="/admin/roles" tag={NavLinkRRD}>
-                <i className="ni ni-controller" />
-                Roles
-              </NavLink>
+              {hasPermission(userPermissions, 'manage-module') && (
+                <NavLink to="/admin/modules" tag={NavLinkRRD}>
+                  <i className="ni ni-planet" />
+                  Modules
+                </NavLink>
+              )}
+              {hasPermission(userPermissions, 'manage-permission') && (
+                <NavLink to="/admin/permissions" tag={NavLinkRRD}>
+                  <i className="ni ni-key-25" />
+                  Permissions
+                </NavLink>
+              )}
+              {hasPermission(userPermissions, 'manage-role') && (
+                <NavLink to="/admin/roles" tag={NavLinkRRD}>
+                  <i className="ni ni-controller" />
+                  Roles
+                </NavLink>
+              )}
             </NavItem>
             <NavItem>
-              <NavLink to="/admin/users" tag={NavLinkRRD}>
-                <i className="fas fa-users" />
-                Users Management
-              </NavLink>
+              {hasPermission(userPermissions, 'manage-user') && (
+                <NavLink to="/admin/users" tag={NavLinkRRD}>
+                  <i className="fas fa-users" />
+                  Users Management
+                </NavLink>
+              )}
             </NavItem>
           </Nav>
           <Nav className="mb-md-3" navbar>

@@ -12,7 +12,9 @@ import { Link } from 'react-router-dom'
 import Header from "components/Headers/Header.js";
 import DataTable from 'react-data-table-component';
 import axiosInstance from 'app/axiosInstance.js';
-import { format } from 'date-fns'
+import { format } from 'date-fns';
+import { hasPermission } from 'features/PermissionUtils';
+import { useSelector } from 'react-redux';
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -23,6 +25,7 @@ const Index = () => {
     const [search, setSearch] = useState('');
     const [perPage, setPerPage] = useState(10);
     const [currentPage, setCurrentPage] = useState(1);
+    const userPermissions = useSelector(state => state.permissions.permissions);
 
     useEffect(() => {
         fetchData();
@@ -80,9 +83,15 @@ const Index = () => {
             name: 'Actions',
             cell: row => (
                 <div>
-                    <Link to={`/admin/roles/edit/${row.id}`} className='btn btn-sm btn-info' title='Edit'><i className='fa fa-edit'></i></Link>{''}
-                    <Button onClick={() => deleteData(row.id)} color="danger" size="sm" title='Delete'><i className='fa fa-trash'></i></Button>{''}
-                    <Link to={`/admin/roles/role-access/${row.id}`} className='btn btn-sm btn-warning' title='Role Access'><i className='fa fa-key'></i></Link>
+                    {hasPermission(userPermissions, 'edit-role') && (
+                        <Link to={`/admin/roles/edit/${row.id}`} className='btn btn-sm btn-info' title='Edit'><i className='fa fa-edit'></i></Link>
+                    )}
+                    {hasPermission(userPermissions, 'delete-role') && (
+                        <Button onClick={() => deleteData(row.id)} color="danger" size="sm" title='Delete'><i className='fa fa-trash'></i></Button>
+                    )}
+                    {hasPermission(userPermissions, 'manage-role-access') && (
+                        <Link to={`/admin/roles/role-access/${row.id}`} className='btn btn-sm btn-warning' title='Role Access'><i className='fa fa-key'></i></Link>
+                    )}
                 </div>
             ),
             button: true,
@@ -120,7 +129,9 @@ const Index = () => {
                             <CardBody>
                                 <div className="row">
                                     <div className="col-6">
-                                        <Link className='btn btn-sm btn-primary' to={"/admin/roles/add"}>Add Roles</Link>
+                                        {hasPermission(userPermissions, 'create-role') && (
+                                            <Link className='btn btn-sm btn-primary' to={"/admin/roles/add"}>Add Roles</Link>
+                                        )}
                                     </div>
                                     <div className="col-6">
                                         <div>

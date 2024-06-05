@@ -19,6 +19,7 @@ import SuccessAlerts from 'components/alerts/SuccessAlerts.js';
 import axiosInstance from 'app/axiosInstance.js';
 import { useDispatch } from "react-redux";
 import { RefreshToken } from 'features/AuthSlice';
+import { addPermission, removePermission } from 'features/PermissionSlice'
 
 const RoleAccess = () => {
     const { id } = useParams();
@@ -70,7 +71,9 @@ const RoleAccess = () => {
             if (attach.data.status === 'success') {
                 setSuccess([{ message: attach.data.msg }]);
             }
-            dispatch(RefreshToken());
+            await dispatch(RefreshToken());
+            const permissionKey = findPermissionKeyById(permissionId, modules);
+            dispatch(addPermission(permissionKey));
         } else {
             setSelectedPermissions(prevSelected => prevSelected.filter(id => id !== permissionId));
             const detach = await axiosInstance.post(`${baseUrl}/access-control/detach_permission`, {
@@ -80,8 +83,19 @@ const RoleAccess = () => {
             if (detach.data.status === 'success') {
                 setSuccess([{ message: detach.data.msg }]);
             }
-            dispatch(RefreshToken());
+            const permissionKey = findPermissionKeyById(permissionId, modules);
+            dispatch(removePermission(permissionKey));
         }
+    };
+
+    const findPermissionKeyById = (permissionId, modules) => {
+        for (const module of modules) {
+            const permission = module.permissions.find(p => p.id === permissionId);
+            if (permission) {
+                return permission.keyName;
+            }
+        }
+        return null;
     };
 
     return (
