@@ -4,6 +4,11 @@ import AuthLayout from "layouts/Auth.js";
 import PrivateRoute from 'features/PrivateRoute.js';
 import Forbidden from 'views/errors/Forbidden.js';
 
+import "assets/plugins/nucleo/css/nucleo.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "assets/css/argon-dashboard-react.min.css";
+import "assets/css/styles.css"
+
 const App = () => {
     return (
         <>
