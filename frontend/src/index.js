@@ -11,7 +11,7 @@ import "assets/css/styles.css"
 
 import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/Auth.js";
-import PrivateRoute from './features/PrivateRoute.js';
+import PrivateRoute from 'features/PrivateRoute.js';
 import Forbidden from 'views/errors/Forbidden.js';
 
 import axios from 'axios';
