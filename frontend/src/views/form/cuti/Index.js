@@ -13,10 +13,10 @@ const Tables = () => {
         <>
             <Header />
             {/* Page content */}
-            <Container className="mt--7" fluid>
+            <Container className="mt--8" fluid>
                 {/* Table */}
                 <Row>
-                    <div className="col">
+                    <div className="col my-2">
                         <Card className="shadow">
                             <CardHeader className="border-0">
                                 <div className="align-items-center row">

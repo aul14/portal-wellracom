@@ -53,7 +53,6 @@ const Admin = () => {
 
   return (
     <>
-      <Sidebar />
       {isCutiPage ? <SidebarCuti /> : <Sidebar />}
       <div className="main-content" ref={mainContent}>
         <AdminNavbar />

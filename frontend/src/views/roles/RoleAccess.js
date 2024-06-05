@@ -104,7 +104,7 @@ const RoleAccess = () => {
             {/* Page content */}
             <Container className="mt--8" fluid>
                 <Row>
-                    <div className="col">
+                    <div className="col my-2">
                         <Card className="shadow">
                             <CardHeader className="border-0">
                                 <h3 className="mb-0">Role Access</h3>

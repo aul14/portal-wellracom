@@ -10,7 +10,7 @@ const Header = () => {
                     <div className="header-body">
                         {/* Card stats */}
                         <Row>
-                            <Col lg="6" xl="4">
+                            <Col lg="6" xl="4" className="my-2">
                                 <Card className="card-stats h-100 mb-4 mb-xl-0">
                                     <div className="d-flex justify-content-center">
                                         <img src={require("../../assets/img/icons/form-cuti.png")} className="card-img-top w-50 text-image" alt="..." />
@@ -38,7 +38,7 @@ const Header = () => {
                                     </CardFooter>
                                 </Card>
                             </Col>
-                            <Col lg="6" xl="4">
+                            <Col lg="6" xl="4" className="my-2">
                                 <Card className="card-stats h-100 mb-4 mb-xl-0">
                                     <div className="d-flex justify-content-center">
                                         <img src={require("../../assets/img/icons/form-rembes.png")} className="card-img-top w-50 text-image" alt="..." />
@@ -66,7 +66,7 @@ const Header = () => {
                                     </CardFooter>
                                 </Card>
                             </Col>
-                            <Col lg="6" xl="4">
+                            <Col lg="6" xl="4" className="my-2">
                                 <Card className="card-stats h-100 mb-4 mb-xl-0">
                                     <div className="d-flex justify-content-center">
                                         <img src={require("../../assets/img/icons/form-booking.png")} className="card-img-top w-50 text-image" alt="..." />
