@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { store } from './store.js'; // Sesuaikan impor sesuai lokasi store Anda
-import { RefreshToken, LogOut, LoginUser } from '../features/AuthSlice.js';
+import { LogOut } from '../features/AuthSlice.js';
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL
 

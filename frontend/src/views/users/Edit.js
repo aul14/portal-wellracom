@@ -225,7 +225,7 @@ const Edit = () => {
                                                 </Col>
                                             </FormGroup>
                                             {preview ? (
-                                                <img src={preview} width={100} alt='Preview Image' className="img img-preview img-fluid" />
+                                                <img src={preview} width={100} alt="Preview Image" className="img img-preview img-fluid" />
                                             ) : null}
                                         </div>
                                     </div>

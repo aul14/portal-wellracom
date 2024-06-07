@@ -7,8 +7,8 @@ export const CheckExpToken = async () => {
 
     // Decode token untuk mendapatkan waktu kadaluarsa (JWT biasanya dalam bentuk base64)
     const tokenPayload = JSON.parse(atob(tokenLocal.split('.')[1]));
-    const exp = tokenPayload.exp;
-    const currentTime = Math.floor(Date.now() / 1000);
+    // const exp = tokenPayload.exp;
+    // const currentTime = Math.floor(Date.now() / 1000);
 
     try {
         await store.dispatch(RefreshToken());
