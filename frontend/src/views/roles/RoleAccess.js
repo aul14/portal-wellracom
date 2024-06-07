@@ -83,6 +83,7 @@ const RoleAccess = () => {
             if (detach.data.status === 'success') {
                 setSuccess([{ message: detach.data.msg }]);
             }
+            await dispatch(RefreshToken());
             const permissionKey = findPermissionKeyById(permissionId, modules);
             dispatch(removePermission(permissionKey));
         }

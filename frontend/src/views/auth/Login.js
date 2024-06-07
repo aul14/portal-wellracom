@@ -16,7 +16,9 @@ import {
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { LoginUser, reset } from 'features/AuthSlice'
+import { LoginUser, reset } from 'features/AuthSlice';
+import { setPermissions } from 'features/PermissionSlice';
+import { jwtDecode } from 'jwt-decode';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -31,6 +33,16 @@ const Login = () => {
 
   useEffect(() => {
     if (isSuccess || user) {
+      const token = localStorage.getItem('token');
+      if (token) {
+        try {
+          const decodedToken = jwtDecode(token.replace(/["']/g, ""));
+          const permissions = decodedToken.data.role.permissions.map(permission => permission.keyName);
+          dispatch(setPermissions(permissions));
+        } catch (error) {
+          console.error("Error decoding token:", error);
+        }
+      }
       navigate("/admin/index");
     }
     dispatch(reset());
