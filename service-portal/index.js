@@ -1,6 +1,5 @@
 import express from 'express';
 import FileUpload from 'express-fileupload';
-import cors from 'cors';
 import dotenv from 'dotenv';
 import moment from 'moment-timezone';
 
@@ -16,11 +15,6 @@ dotenv.config();
 const app = express();
 
 moment.tz.setDefault('Asia/Jakarta');
-
-app.use(cors({
-    credentials: true,
-    origin: [`${process.env.HOSTNAME}`]
-}))
 
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: false, limit: '50mb' }));
