@@ -39,7 +39,7 @@ const Edit = () => {
         }
 
         getModuleById();
-    }, [id])
+    }, [id, baseUrl])
 
     const editModule = async (e) => {
         e.preventDefault();

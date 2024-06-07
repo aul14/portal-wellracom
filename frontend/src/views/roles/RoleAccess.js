@@ -59,7 +59,7 @@ const RoleAccess = () => {
         };
 
         fetchData();
-    }, [id]);
+    }, [id, baseUrl]);
 
     const handlePermissionChange = async (permissionId, checked) => {
         if (checked) {

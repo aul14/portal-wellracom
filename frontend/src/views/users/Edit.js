@@ -73,7 +73,7 @@ const Edit = () => {
 
         fetchRoles();
         getUserById();
-    }, [id]);
+    }, [id, baseUrl]);
 
     const loadImage = (e) => {
         const image = e.target.files[0];

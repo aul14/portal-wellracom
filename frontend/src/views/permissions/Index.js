@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
     Card,
     CardHeader,
@@ -27,11 +27,7 @@ const Index = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const userPermissions = useSelector(state => state.permissions.permissions);
 
-    useEffect(() => {
-        fetchData();
-    }, [search, perPage, currentPage]);
-
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         try {
             setLoading(true);
             const response = await axiosInstance.get(`${baseUrl}/permissions/query`, {
@@ -51,7 +47,12 @@ const Index = () => {
         } finally {
             setLoading(false);
         }
-    }
+    }, [search, perPage, currentPage])
+
+    useEffect(() => {
+        fetchData();
+    }, [fetchData]);
+
 
     const deleteData = async (id) => {
         if (window.confirm("Are you sure you want to delete this item?")) {

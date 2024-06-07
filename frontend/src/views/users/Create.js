@@ -47,7 +47,7 @@ const Create = () => {
         };
 
         fetchRoles();
-    }, []);
+    }, [baseUrl]);
 
     const loadImage = (e) => {
         const image = e.target.files[0];

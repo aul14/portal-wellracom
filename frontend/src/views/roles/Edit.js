@@ -41,7 +41,7 @@ const Create = () => {
         }
 
         getRoleById();
-    }, [id])
+    }, [id, baseUrl])
 
     const editRole = async (e) => {
         e.preventDefault();

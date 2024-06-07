@@ -61,7 +61,7 @@ const Edit = () => {
 
         fetchModules();
         getPermissionById();
-    }, [id]);
+    }, [id, baseUrl]);
 
     const handleSelectChange = (selectedOption) => {
         setSelectedModule(selectedOption);

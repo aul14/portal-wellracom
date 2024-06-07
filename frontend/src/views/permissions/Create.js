@@ -40,7 +40,7 @@ const Create = () => {
         };
 
         fetchModules();
-    }, []);
+    }, [baseUrl]);
 
     const handleSelectChange = (selectedOption) => {
         setSelectedModule(selectedOption);
