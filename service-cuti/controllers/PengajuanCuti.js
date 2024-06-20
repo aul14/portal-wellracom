@@ -264,8 +264,7 @@ export const created = async (req, res) => {
         const approvalCutiData = approvalCutiId.split(',').map(userId => ({
             pengajuan_cuti_id: pengajuanCutiId,
             user_id: userId,
-            status: 'pending',
-            tgl_approval: null
+            status: 'pending'
         }))
 
         await ApprovalCuti.bulkCreate(approvalCutiData, { transaction: trx })
@@ -459,8 +458,7 @@ export const updated = async (req, res) => {
         const approvalCutiData = approvalCutiId.split(',').map(userId => ({
             pengajuan_cuti_id: checkPengajuanCuti.id,
             user_id: userId,
-            status: 'pending',
-            tgl_approval: null
+            status: 'pending'
         }))
 
         await ApprovalCuti.bulkCreate(approvalCutiData, { transaction: trx })
