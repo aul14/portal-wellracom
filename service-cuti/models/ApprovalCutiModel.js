@@ -38,6 +38,10 @@ const ApprovalCuti = db.define('approval_cuti', {
         type: DataTypes.DATE,
         allowNull: true,
     },
+    tgl_not_approval: {
+        type: DataTypes.DATE,
+        allowNull: true,
+    },
     keterangan: {
         type: DataTypes.TEXT,
         allowNull: true,

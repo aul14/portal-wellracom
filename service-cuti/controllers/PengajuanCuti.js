@@ -42,7 +42,7 @@ export const getAll = async (req, res) => {
         const combinedResponse = response.map(item => {
             return {
                 ...item.toJSON(),  // Convert sequelize model instance to plain object
-                user_name: nameUserMap[item.user_id] // Add the user name from nameUserMap
+                pengajuan_cuti_username: nameUserMap[item.user_id] // Add the user name from nameUserMap
             };
         });
 
@@ -156,6 +156,8 @@ export const created = async (req, res) => {
         const validate = v.validate(req.body, schema);
 
         if (validate.length) {
+            await trx.rollback();
+
             return res.status(400).json({
                 status: 'error',
                 msg: validate
