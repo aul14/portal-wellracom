@@ -29,6 +29,8 @@ app.use(RefreshToken);
 app.use(AuthRoute);
 app.use(PermissionRoleRoute);
 
-app.listen(process.env.APP_PORT, () => {
-    console.log("Server up and running...");
+const port = process.env.APP_PORT || 5000;
+
+app.listen(port, () => {
+    console.log(`Server up and running in port ${port} ...`);
 })

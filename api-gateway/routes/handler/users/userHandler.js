@@ -11,7 +11,11 @@ const api = apiAdapter(URL_SERVICE_PORTAL);
 
 export const getAll = async (req, res) => {
     try {
-        const users = await api.get(`/users`);
+        const users = await api.get(`/users`, {
+            params: {
+                ...req.query
+            }
+        });
         res.json(users.data)
     } catch (error) {
         if (error.code === 'ECONNREFUSED') {

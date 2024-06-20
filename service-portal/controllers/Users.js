@@ -57,13 +57,31 @@ export const getUsersQuery = async (req, res) => {
 
 export const getUsers = async (req, res) => {
     try {
+        const userIds = req.query.userIds ? req.query.userIds.split(',').map(Number) : null;
+
+        const whereCondition = userIds ? { id: { [Op.in]: userIds } } : {};
+
         const response = await User.findAll({
+            where: whereCondition,
             attributes: ['id', 'name', 'username', 'email', 'avatar', 'date_start', 'date_end', 'have_cuti', 'sisa_cuti', 'telegram_id', 'createdAt', 'updatedAt'],
             include: [{
                 model: Role,
                 attributes: ['id', 'name', 'description']
             }]
         });
+
+        if (userIds) {
+            const foundIds = response.map(user => user.id);
+            const notFoundIds = userIds.filter(id => !foundIds.includes(id));
+
+            if (notFoundIds.length > 0) {
+                // Munculkan pesan error jika ada ID yang tidak ditemukan
+                return res.status(404).json({
+                    status: 'error',
+                    msg: `User dengan id ${notFoundIds.join(', ')} tidak ditemukan.`
+                })
+            }
+        }
 
         res.status(200).json({
             status: 'success',

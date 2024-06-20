@@ -48,6 +48,8 @@ app.get('/images/:imageName', (req, res) => {
     proxy.web(req, res, { target: `${URL_SERVICE_PORTAL}` });
 });
 
-app.listen(process.env.APP_PORT, () => {
-    console.log(`Server up and running...`);
+const port = process.env.APP_PORT || 3000;
+
+app.listen(port, () => {
+    console.log(`Server up and running in port ${port} ...`);
 })
