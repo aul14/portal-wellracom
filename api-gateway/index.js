@@ -14,6 +14,8 @@ import modulesRoute from './routes/modules.js';
 import permissionsRoute from './routes/permissions.js';
 import permissionsRolesRoute from './routes/permissionsRoles.js';
 import refreshTokensRoute from './routes/refreshToken.js';
+import pengajuanCutiRoute from './routes/pengajuanCuti.js';
+import approvalCutiRoute from './routes/approvalCuti.js';
 
 import { verifyToken } from './middlewares/verifyToken.js';
 
@@ -42,6 +44,8 @@ app.use('/modules', verifyToken, modulesRoute);
 app.use('/permissions', verifyToken, permissionsRoute);
 app.use('/access-control', verifyToken, permissionsRolesRoute);
 app.use('/refresh-tokens', verifyToken, refreshTokensRoute);
+app.use('/pengajuan-cuti', verifyToken, pengajuanCutiRoute);
+app.use('/approved-waiting', verifyToken, approvalCutiRoute);
 
 // Route untuk mendapatkan gambar dari service user
 app.get('/images/:imageName', (req, res) => {

@@ -77,7 +77,6 @@ import argon2 from 'argon2';
             { keyName: 'manage-approval-cuti', name: 'Manage Approval Cuti', description: 'Boleh manage approval cuti', module_id: 7 },
             { keyName: 'approved-cuti', name: 'Approved Cuti', description: 'Akses untuk mensetujui cuti', module_id: 7 },
             { keyName: 'not-approved-cuti', name: 'Not Approved Cuti', description: 'Akses untuk tidak mensetujui cuti', module_id: 7 },
-            { keyName: 'show-status-pengajuan-cuti', name: 'Show Status Pengajuan Cuti', description: 'Boleh melihat pengajuan cuti dengan status pending, disetujui & tidak disetujui', module_id: 6 },
             { keyName: 'manage-history-cuti', name: 'Manage History Cuti', description: 'Boleh manage history cuti', module_id: 8 },
         ]);
 
@@ -115,7 +114,6 @@ import argon2 from 'argon2';
             { permission_id: 29, role_id: 1 },
             { permission_id: 30, role_id: 1 },
             { permission_id: 31, role_id: 1 },
-            { permission_id: 32, role_id: 1 },
         ]);
 
         console.log("Database migration & seeded succesfully!");
