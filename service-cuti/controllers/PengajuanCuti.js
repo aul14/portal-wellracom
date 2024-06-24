@@ -48,11 +48,34 @@ export const getQuery = async (req, res) => {
             }]
         });
 
+        const arrayColumn = cutiData.rows.map(item => item['user_id'])
+
+        // get name users from service portal.
+        const nameUserResponse = await api.get(`/users`, {
+            params: {
+                userIds: arrayColumn.join(",")
+            }
+        })
+
+        // Convert nameUserResponse to a map for easier lookup
+        const nameUserMap = nameUserResponse.data.data.reduce((map, user) => {
+            map[user.id] = user.name;
+            return map;
+        }, {});
+
+        // Combine response with nameUser
+        const combinedResponse = cutiData.rows.map(item => {
+            return {
+                ...item.toJSON(),  // Convert sequelize model instance to plain object
+                pengajuan_cuti_username: nameUserMap[item.user_id] // Add the user name from nameUserMap
+            };
+        });
+
         const responseData = {
             draw: parseInt(draw),
             recordsTotal: cutiData.count,
             recordsFiltered: cutiData.rows.length,
-            data: cutiData.rows
+            data: combinedResponse
         };
 
         res.json(responseData);
