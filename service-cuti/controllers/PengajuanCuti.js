@@ -5,6 +5,7 @@ import db from '../config/Database.js';
 import apiAdapter from '../helpers/apiAdapter.js';
 import dotenv from 'dotenv';
 import Validator from 'fastest-validator';
+import { Op } from 'sequelize';
 import path from 'path';
 import fs from 'fs';
 const v = new Validator();
@@ -13,6 +14,56 @@ dotenv.config();
 const { URL_SERVICE_PORTAL } = process.env;
 
 const api = apiAdapter(URL_SERVICE_PORTAL);
+
+export const getQuery = async (req, res) => {
+    const { draw, start, length, search, order, status, user_id } = req.query;
+
+    try {
+        const searchData = {
+            ...search ? {
+                [Op.or]: [
+                    { keterangan: { [Op.like]: `%${search}%` } },
+                    { status: { [Op.like]: `%${search}%` } },
+                    { tgl_awal: { [Op.like]: `%${search}%` } },
+                    { tgl_akhir: { [Op.like]: `%${search}%` } },
+                    { '$jenis_cuti.name$': { [Op.like]: `%${search}%` } },
+                ]
+            } : {},
+            ...status ? { status: status } : {},
+            ...user_id ? { user_id: user_id } : {}
+        };
+
+        const sortOrder = order === 'asc' ? 'ASC' : 'DESC';
+
+        const cutiData = await PengajuanCuti.findAndCountAll({
+            where: searchData,
+            order: [['id', sortOrder]],
+            limit: parseInt(length),
+            offset: parseInt(start),
+            include: [{
+                model: JenisCuti,
+                attributes: ['id', 'name'],
+                where: search ? { name: { [Op.like]: `%${search}%` } } : {}, // Apply search to Role model
+                required: false // Use 'required: false' to perform a LEFT JOIN
+            }]
+        });
+
+        const responseData = {
+            draw: parseInt(draw),
+            recordsTotal: cutiData.count,
+            recordsFiltered: cutiData.rows.length,
+            data: cutiData.rows
+        };
+
+        res.json(responseData);
+
+    } catch (error) {
+        res.status(500).json({
+            status: 'error',
+            msg: error.message
+        })
+    }
+}
 
 export const getAll = async (req, res) => {
     try {

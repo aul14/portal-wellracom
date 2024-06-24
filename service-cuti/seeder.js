@@ -2,6 +2,7 @@ import db from './config/Database.js';
 import JenisCuti from './models/JenisCutiModel.js';
 import PengajuanCuti from './models/PengajuanCutiModel.js';
 import ApprovalCuti from './models/ApprovalCutiModel.js';
+import Holiday from './models/HolidayModel.js'
 
 (async () => {
     try {

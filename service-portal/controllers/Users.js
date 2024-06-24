@@ -312,7 +312,7 @@ export const updateUser = async (req, res) => {
             })
         }
 
-        const { name, username, email, password, confPassword, roleId, dateStart, dateEnd, telegramId, haveCuti } = req.body;
+        const { name, username, email, password, confPassword, roleId, dateStart, dateEnd, telegramId, haveCuti, makeCuti } = req.body;
 
         let hashPassword;
         if (password === "" || password == null) {
@@ -366,11 +366,22 @@ export const updateUser = async (req, res) => {
         let sisaCuti = 0;
         if (haveCuti) {
             if (strToBool(haveCuti) && user.have_cuti) {
-                sisaCuti = user.sisaCuti;
+                sisaCuti = user.sisa_cuti;
             } else if (strToBool(haveCuti) && !user.have_cuti) {
                 sisaCuti = 12;
             } else {
                 sisaCuti = 0;
+            }
+        }
+
+        if (makeCuti) {
+            if (user.sisa_cuti - makeCuti <= 0) {
+                return res.status(400).json({
+                    status: 'error',
+                    msg: `Cuti anda tersisa ${user.sisa_cuti}, dilarang mengajukan cuti lebih dari sisa cuti yg dimiliki!`
+                })
+            } else {
+                sisaCuti = user.sisa_cuti - makeCuti
             }
         }
 
@@ -426,7 +437,7 @@ export const updateUser = async (req, res) => {
             telegram_id: telegramId,
             avatar: fileName,
             url_avatar: url,
-            have_cuti: haveCuti ? strToBool(haveCuti) : false,
+            have_cuti: haveCuti ? strToBool(haveCuti) : (makeCuti ? true : false),
             sisa_cuti: sisaCuti
         });
 

@@ -1,6 +1,8 @@
 import ApprovalCuti from '../models/ApprovalCutiModel.js';
 import PengajuanCuti from '../models/PengajuanCutiModel.js';
 import apiAdapter from '../helpers/apiAdapter.js';
+import { checkAndInsertHoliday } from '../controllers/Holiday.js';
+import moment from 'moment-business-days';
 import db from '../config/Database.js';
 import { Op } from 'sequelize';
 import Validator from 'fastest-validator';
@@ -113,16 +115,15 @@ export const approved = async (req, res) => {
             })
         }
 
+        // Check semuanya pengajuan cuti tersebut sudah di approve atau tidak.
+        let approvedAll = true;
+        let hasRejected = false;
+
         await checkApprovalCuti.update({
             status: 'disetujui',
             tgl_approval: new Date,
             keterangan: keterangan
         }, { transaction: trx })
-
-
-        // Check semuanya pengajuan cuti tersebut sudah di approve atau tidak.
-        let approvedAll = true;
-        let hasRejected = false;
 
         const checkAllApprovedCuti = await ApprovalCuti.findAll({
             where: {
@@ -140,6 +141,7 @@ export const approved = async (req, res) => {
             }
         })
 
+
         const getStatusCuti = await PengajuanCuti.findOne({
             where: {
                 id: pengajuanCutiId
@@ -154,6 +156,37 @@ export const approved = async (req, res) => {
             }, { transaction: trx })
 
         } else if (approvedAll) {
+            const getTglAwal = moment(getStatusCuti.tgl_awal);
+            const getTglAkhir = moment(getStatusCuti.tgl_akhir);
+
+            const holidaysData = await checkAndInsertHoliday();
+            const holidays = holidaysData.map(holiday => holiday.holiday_date);
+
+            // Set locale untuk moment-business-days dengan tanggal libur
+            moment.updateLocale('id', {
+                holidays: holidays,
+                holidayFormat: 'YYYY-MM-DD'
+            });
+
+            const workDays = getTglAwal.businessDiff(getTglAkhir) + 1;
+
+            //update sisa cuti di service portal
+            try {
+                await api.put(`/users/${getStatusCuti.user_id}`, {
+                    makeCuti: workDays
+                }, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                });
+            } catch (error) {
+                await trx.rollback();
+                return res.status(500).json({
+                    status: 'error',
+                    msg: error
+                });
+            }
+
             //update status pengajuan cuti menjadi disetujui
             await getStatusCuti.update({
                 status: 'disetujui'
@@ -172,7 +205,7 @@ export const approved = async (req, res) => {
 
         res.status(500).json({
             status: 'error',
-            msg: error.message
+            msg: error
         })
     }
 }

@@ -1,8 +1,9 @@
 import express from 'express';
-import { created, getAll, getById, getByJenis, getByUser, destroy, updated } from '../controllers/PengajuanCuti.js';
+import { created, getAll, getById, getByJenis, getByUser, destroy, updated, getQuery } from '../controllers/PengajuanCuti.js';
 
 const router = express.Router();
 
+router.get('/pengajuan-cuti/query', getQuery);
 router.get('/pengajuan-cuti', getAll);
 router.get('/pengajuan-cuti/:id', getById);
 router.put('/pengajuan-cuti/:id', updated);
