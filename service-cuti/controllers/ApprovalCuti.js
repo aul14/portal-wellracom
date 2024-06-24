@@ -183,7 +183,7 @@ export const approved = async (req, res) => {
                 await trx.rollback();
                 return res.status(500).json({
                     status: 'error',
-                    msg: error
+                    msg: error.message
                 });
             }
 
@@ -205,7 +205,7 @@ export const approved = async (req, res) => {
 
         res.status(500).json({
             status: 'error',
-            msg: error
+            msg: error.message
         })
     }
 }
