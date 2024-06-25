@@ -9,9 +9,9 @@ import {
 } from "reactstrap";
 // core components
 import "@fortawesome/fontawesome-free/css/all.min.css";
-import { Link, useLocation } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Header from "components/Headers/Header.js";
-import DataTable, { Media } from 'react-data-table-component';
+import DataTable from 'react-data-table-component';
 import axiosInstance from 'app/axiosInstance.js';
 import { format } from 'date-fns';
 import { hasPermission } from 'features/PermissionUtils';
@@ -21,7 +21,6 @@ import { jwtDecode } from 'jwt-decode';
 const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
 const Index = () => {
-    const location = useLocation();
     const userData = jwtDecode(localStorage.getItem('token').replace(/["']/g, ""));
     const [data, setData] = useState([]);
     const [totalRows, setTotalRows] = useState(0);
@@ -65,7 +64,7 @@ const Index = () => {
         } finally {
             setLoading(false);
         }
-    }, [search, perPage, currentPage])
+    }, [search, perPage, currentPage, userData.data.id, userPermissions])
 
     useEffect(() => {
         fetchData();
@@ -99,7 +98,7 @@ const Index = () => {
     const columns = [
         {
             name: 'Actions',
-            cell: row => (row.status == 'pending') ? (
+            cell: row => (row.status === 'pending') ? (
                 <div>
                     {hasPermission(userPermissions, 'edit-pengajuan-cuti') && (
                         <Link to={`/admin/pengajuan-cuti/edit/${row.id}`} className='btn btn-sm btn-info' title='Edit'><i className='fa fa-edit'></i></Link>
@@ -165,7 +164,7 @@ const Index = () => {
         },
         {
             name: 'Status',
-            selector: row => (row.status == 'pending' ? <span className="badge badge-primary">{row.status}</span> : (row.status == 'disetujui' ? <span className="badge badge-success">{row.status}</span> : <span className="badge badge-danger">{row.status}</span>)),
+            selector: row => (row.status === 'pending' ? <span className="badge badge-primary">{row.status}</span> : (row.status === 'disetujui' ? <span className="badge badge-success">{row.status}</span> : <span className="badge badge-danger">{row.status}</span>)),
             sortable: true
         },
         {
@@ -198,7 +197,7 @@ const Index = () => {
                                 <div className="row">
                                     <div className="col-6">
                                         {hasPermission(userPermissions, 'create-pengajuan-cuti') && (
-                                            <Link className='btn btn-sm btn-primary' to={"/admin/pengajuan-cuti/add"}>Add Pengajuan Cuti</Link>
+                                            <Link className='btn btn-sm btn-primary' to={"/admin/cuti/add"}>Add Pengajuan Cuti</Link>
                                         )}
                                     </div>
                                     <div className="col-6">

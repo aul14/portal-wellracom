@@ -24,6 +24,7 @@ import Users from 'views/users/Index';
 import CreateUser from 'views/users/Create';
 import EditUser from 'views/users/Edit';
 import IndexCuti from 'views/form/cuti/Index';
+import CreateCuti from 'views/form/cuti/Create';
 import IndexCutiWaiting from 'views/form/cuti/IndexWaiting';
 import IndexCutiPending from 'views/form/cuti/IndexPending';
 import IndexCutiDisetujui from 'views/form/cuti/IndexDisetujui';
@@ -53,7 +54,7 @@ const Admin = () => {
     };
   }, [location]);
 
-  const isCutiPage = location.pathname === "/admin/cuti" || location.pathname === "/admin/cuti-waiting" || location.pathname === "/admin/cuti-pending" || location.pathname === "/admin/cuti-disetujui" || location.pathname === "/admin/cuti-tidak-disetujui";
+  const isCutiPage = location.pathname === "/admin/cuti" || location.pathname === "/admin/cuti/add" || location.pathname === "/admin/cuti-waiting" || location.pathname === "/admin/cuti-pending" || location.pathname === "/admin/cuti-disetujui" || location.pathname === "/admin/cuti-tidak-disetujui";
 
   return (
     <>
@@ -77,6 +78,7 @@ const Admin = () => {
           <Route path="/users/add" element={<CreateUser />} />
           <Route path="/users/edit/:id" element={<EditUser />} />
           <Route path="/cuti" element={<IndexCuti />} />
+          <Route path="/cuti/add" element={<CreateCuti />} />
           <Route path="/cuti-waiting" element={<IndexCutiWaiting />} />
           <Route path="/cuti-pending" element={<IndexCutiPending />} />
           <Route path="/cuti-disetujui" element={<IndexCutiDisetujui />} />

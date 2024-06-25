@@ -6,7 +6,7 @@ export const CheckExpToken = async () => {
     if (!tokenLocal) return;
 
     // Decode token untuk mendapatkan waktu kadaluarsa (JWT biasanya dalam bentuk base64)
-    const tokenPayload = JSON.parse(atob(tokenLocal.split('.')[1]));
+    // const tokenPayload = JSON.parse(atob(tokenLocal.split('.')[1]));
     // const exp = tokenPayload.exp;
     // const currentTime = Math.floor(Date.now() / 1000);
 
