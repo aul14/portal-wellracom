@@ -1,30 +1,34 @@
 import React, { useEffect } from "react";
 import { useLocation, Route, Routes } from "react-router-dom";
-import { CheckExpToken } from 'features/CheckExpToken.js';
+import { CheckExpToken } from 'features/CheckExpToken';
 // reactstrap components
 import { Container } from "reactstrap";
 // core components
-import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import AdminFooter from "components/Footers/AdminFooter.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
+import AdminNavbar from "components/Navbars/AdminNavbar";
+import AdminFooter from "components/Footers/AdminFooter";
+import Sidebar from "components/Sidebar/Sidebar";
 
-import Index from 'views/Index.js';
-import Tables from 'views/examples/Tables.js';
-import Modules from 'views/modules/Index.js';
-import CreateModule from 'views/modules/Create.js';
-import EditModule from 'views/modules/Edit.js';
-import Permissions from 'views/permissions/Index.js';
-import CreatePermission from 'views/permissions/Create.js';
-import EditPermission from 'views/permissions/Edit.js';
-import Roles from 'views/roles/Index.js';
-import CreateRole from 'views/roles/Create.js';
-import EditRole from 'views/roles/Edit.js';
-import RoleAccess from 'views/roles/RoleAccess.js';
-import Users from 'views/users/Index.js';
-import CreateUser from 'views/users/Create.js';
-import EditUser from 'views/users/Edit.js';
-import IndexCuti from 'views/form/cuti/Index.js';
-import SidebarCuti from 'views/form/cuti/SidebarCuti.js';
+import Index from 'views/Index';
+import Tables from 'views/examples/Tables';
+import Modules from 'views/modules/Index';
+import CreateModule from 'views/modules/Create';
+import EditModule from 'views/modules/Edit';
+import Permissions from 'views/permissions/Index';
+import CreatePermission from 'views/permissions/Create';
+import EditPermission from 'views/permissions/Edit';
+import Roles from 'views/roles/Index';
+import CreateRole from 'views/roles/Create';
+import EditRole from 'views/roles/Edit';
+import RoleAccess from 'views/roles/RoleAccess';
+import Users from 'views/users/Index';
+import CreateUser from 'views/users/Create';
+import EditUser from 'views/users/Edit';
+import IndexCuti from 'views/form/cuti/Index';
+import IndexCutiWaiting from 'views/form/cuti/IndexWaiting';
+import IndexCutiPending from 'views/form/cuti/IndexPending';
+import IndexCutiDisetujui from 'views/form/cuti/IndexDisetujui';
+import IndexCutiTidakDisetujui from 'views/form/cuti/IndexTidakDisetujui';
+import SidebarCuti from 'views/form/cuti/SidebarCuti';
 
 const tokenExp = process.env.REACT_APP_TOKEN_EXPIRY;
 
@@ -49,7 +53,7 @@ const Admin = () => {
     };
   }, [location]);
 
-  const isCutiPage = location.pathname === "/admin/cuti";
+  const isCutiPage = location.pathname === "/admin/cuti" || location.pathname === "/admin/cuti-waiting" || location.pathname === "/admin/cuti-pending" || location.pathname === "/admin/cuti-disetujui" || location.pathname === "/admin/cuti-tidak-disetujui";
 
   return (
     <>
@@ -73,6 +77,10 @@ const Admin = () => {
           <Route path="/users/add" element={<CreateUser />} />
           <Route path="/users/edit/:id" element={<EditUser />} />
           <Route path="/cuti" element={<IndexCuti />} />
+          <Route path="/cuti-waiting" element={<IndexCutiWaiting />} />
+          <Route path="/cuti-pending" element={<IndexCutiPending />} />
+          <Route path="/cuti-disetujui" element={<IndexCutiDisetujui />} />
+          <Route path="/cuti-tidak-disetujui" element={<IndexCutiTidakDisetujui />} />
         </Routes>
         <Container fluid>
           <AdminFooter />

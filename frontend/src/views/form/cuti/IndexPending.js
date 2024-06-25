@@ -42,7 +42,8 @@ const Index = () => {
                         start: (currentPage - 1) * perPage,
                         length: perPage,
                         search: search,
-                        order: 'desc'
+                        order: 'desc',
+                        status: 'pending'
                     }
                 });
             } else if (!hasPermission(userPermissions, 'show-all-pengajuan-cuti') && hasPermission(userPermissions, 'show-individu-pengajuan-cuti')) {
@@ -53,7 +54,8 @@ const Index = () => {
                         length: perPage,
                         search: search,
                         order: 'desc',
-                        user_id: userData.data.id
+                        user_id: userData.data.id,
+                        status: 'pending'
                     }
                 });
             }
@@ -70,17 +72,6 @@ const Index = () => {
     useEffect(() => {
         fetchData();
     }, [fetchData]);
-
-    const deleteData = async (id) => {
-        if (window.confirm("Are you sure you want to delete this item?")) {
-            try {
-                await axiosInstance.delete(`${baseUrl}/pengajuan-cuti/${id}`);
-                fetchData();
-            } catch (error) {
-                console.error('Error deleting data:', error);
-            }
-        }
-    }
 
     const handleSearchChange = (e) => {
         setSearch(e.target.value);
@@ -99,19 +90,7 @@ const Index = () => {
     const columns = [
         {
             name: 'Actions',
-            cell: row => (row.status == 'pending') ? (
-                <div>
-                    {hasPermission(userPermissions, 'edit-pengajuan-cuti') && (
-                        <Link to={`/admin/pengajuan-cuti/edit/${row.id}`} className='btn btn-sm btn-info' title='Edit'><i className='fa fa-edit'></i></Link>
-                    )}
-                    {hasPermission(userPermissions, 'detail-pengajuan-cuti') && (
-                        <Link to={`/admin/pengajuan-cuti/detail/${row.id}`} className='btn btn-sm btn-success' title='Detail'><i className='fa fa-eye'></i></Link>
-                    )}
-                    {hasPermission(userPermissions, 'delete-pengajuan-cuti') && (
-                        <Button onClick={() => deleteData(row.id)} color="danger" size="sm" title='Delete'><i className='fa fa-trash'></i></Button>
-                    )}
-                </div>
-            ) : (
+            cell: row => (
                 <div>
                     {hasPermission(userPermissions, 'detail-pengajuan-cuti') && (
                         <Link to={`/admin/pengajuan-cuti/detail/${row.id}`} className='btn btn-sm btn-success' title='Detail'><i className='fa fa-eye'></i></Link>
@@ -187,7 +166,7 @@ const Index = () => {
                             <CardHeader className="border-0">
                                 <div className="align-items-center row">
                                     <div className="col-8">
-                                        <h3 className="mb-0">List Pengajuan Cuti</h3>
+                                        <h3 className="mb-0">List Pending</h3>
                                     </div>
                                     <div className="text-right col-4">
                                         <p className="mb-0">Sisa cuti anda: {userData.data.sisaCuti}</p>

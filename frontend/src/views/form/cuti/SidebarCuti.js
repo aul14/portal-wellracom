@@ -135,13 +135,13 @@ const Sidebar = (props) => {
                     <h6 className="navbar-heading text-muted">Management Cuti</h6>
                     <Nav className="md-3" navbar>
                         <NavItem>
-                            <NavLink to="#" tag={NavLinkRRD}>
+                            <NavLink to="/admin/cuti" tag={NavLinkRRD}>
                                 <i className="fas fa-book" />
                                 List Pengajuan Cuti
                             </NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink to="#" tag={NavLinkRRD}>
+                            <NavLink to="/admin/cuti-waiting" tag={NavLinkRRD}>
                                 <i className="ni ni-time-alarm" />
                                 Menunggu Approval
                             </NavLink>
@@ -151,15 +151,15 @@ const Sidebar = (props) => {
                     <h6 className="navbar-heading text-muted">Data Pengajuan Cuti</h6>
                     <Nav className="md-3" navbar>
                         <NavItem>
-                            <NavLink to="#" tag={NavLinkRRD}>
+                            <NavLink to="/admin/cuti-pending" tag={NavLinkRRD}>
                                 <i className="ni ni-watch-time" />
                                 Pending
                             </NavLink>
-                            <NavLink to="#" tag={NavLinkRRD}>
+                            <NavLink to="/admin/cuti-disetujui" tag={NavLinkRRD}>
                                 <i className="ni ni-check-bold" />
                                 Disetejui
                             </NavLink>
-                            <NavLink to="#" tag={NavLinkRRD}>
+                            <NavLink to="/admin/cuti-tidak-disetujui" tag={NavLinkRRD}>
                                 <i className="ni ni-fat-remove" />
                                 Tidak Disetujui
                             </NavLink>

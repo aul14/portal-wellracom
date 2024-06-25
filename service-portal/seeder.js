@@ -70,9 +70,12 @@ import argon2 from 'argon2';
             { keyName: 'edit-role', name: 'Edit Role', description: 'Boleh Edit Role', module_id: 5 },
             { keyName: 'delete-role', name: 'Delete Role', description: 'Boleh Delete Role', module_id: 5 },
             { keyName: 'manage-role-access', name: 'Manage Role Access', description: 'Boleh Manage Role Access', module_id: 5 },
+            { keyName: 'show-individu-pengajuan-cuti', name: 'Show Individu Pengajuan Cuti', description: 'Boleh melihat pengajuan cuti individu', module_id: 6 },
+            { keyName: 'show-all-pengajuan-cuti', name: 'Show All Pengajuan Cuti', description: 'Boleh melihat pengajuan cuti semuanya', module_id: 6 },
             { keyName: 'manage-pengajuan-cuti', name: 'Manage Pengajuan Cuti', description: 'Boleh manage pengajuan cuti', module_id: 6 },
             { keyName: 'create-pengajuan-cuti', name: 'Create Pengajuan Cuti', description: 'Boleh create pengajuan cuti', module_id: 6 },
             { keyName: 'edit-pengajuan-cuti', name: 'Edit Pengajuan Cuti', description: 'Boleh edit pengajuan cuti', module_id: 6 },
+            { keyName: 'detail-pengajuan-cuti', name: 'Detail Pengajuan Cuti', description: 'Boleh liat detail pengajuan cuti', module_id: 6 },
             { keyName: 'delete-pengajuan-cuti', name: 'Delete Pengajuan Cuti', description: 'Boleh delete pengajuan cuti', module_id: 6 },
             { keyName: 'manage-approval-cuti', name: 'Manage Approval Cuti', description: 'Boleh manage approval cuti', module_id: 7 },
             { keyName: 'approved-cuti', name: 'Approved Cuti', description: 'Akses untuk mensetujui cuti', module_id: 7 },
@@ -114,6 +117,9 @@ import argon2 from 'argon2';
             { permission_id: 29, role_id: 1 },
             { permission_id: 30, role_id: 1 },
             { permission_id: 31, role_id: 1 },
+            { permission_id: 32, role_id: 1 },
+            { permission_id: 33, role_id: 1 },
+            { permission_id: 34, role_id: 1 },
         ]);
 
         console.log("Database migration & seeded succesfully!");
