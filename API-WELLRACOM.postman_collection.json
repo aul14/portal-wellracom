@@ -1,0 +1,939 @@
+{
+	"info": {
+		"_postman_id": "30d714e6-6bcc-4386-810e-9a791494d3b2",
+		"name": "API-WELLRACOM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27974172"
+	},
+	"item": [
+		{
+			"name": "API PORTAL",
+			"item": [
+				{
+					"name": "roles",
+					"item": [
+						{
+							"name": "http://localhost:5000/roles",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5000/roles"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/roles",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User\",\r\n    \"description\": \"Ini adalah role user.\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5000/roles"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/roles/2",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5000/roles/2"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/roles/2",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"User\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5000/roles/2"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/roles/3",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "http://localhost:5000/roles/3"
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:5000/roles/query?draw=1&start=0&length=10&search=&order=asc",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/roles/query?draw=1&start=0&length=10&search=&order=asc",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"roles",
+										"query"
+									],
+									"query": [
+										{
+											"key": "draw",
+											"value": "1"
+										},
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "length",
+											"value": "10"
+										},
+										{
+											"key": "search",
+											"value": ""
+										},
+										{
+											"key": "order",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "users",
+					"item": [
+						{
+							"name": "http://localhost:5000/users",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5000/users?userIds=3,2",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"users"
+									],
+									"query": [
+										{
+											"key": "userIds",
+											"value": "3,2"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/users/7",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5000/users/2"
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:5000/users/query?draw=1&start=0&length=10&search=&order=asc",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/users/query?draw=1&start=0&length=10&search=&order=asc",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"users",
+										"query"
+									],
+									"query": [
+										{
+											"key": "draw",
+											"value": "1"
+										},
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "length",
+											"value": "10"
+										},
+										{
+											"key": "search",
+											"value": ""
+										},
+										{
+											"key": "order",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/users",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Super admin",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "username",
+											"value": "user",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "email",
+											"value": "user@gmail.com",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "password",
+											"value": "123456",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "confPassword",
+											"value": "123456",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "roleId",
+											"value": "2",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/D:/Dokumen shilki-aul/aplikasi-harmony.png",
+											"disabled": true
+										},
+										{
+											"key": "dateStart",
+											"value": "2023-05-01",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "haveCuti",
+											"value": "true",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "makeCuti",
+											"value": "10",
+											"type": "text"
+										}
+									]
+								},
+								"url": "http://localhost:5000/users/3"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/users",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Super Admin2",
+											"type": "text"
+										},
+										{
+											"key": "username",
+											"value": "admin2",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "admin2@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "123456",
+											"type": "text"
+										},
+										{
+											"key": "confPassword",
+											"value": "123456",
+											"type": "text"
+										},
+										{
+											"key": "roleId",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/D:/Dokumen shilki-aul/image-removebg-preview.png",
+											"disabled": true
+										},
+										{
+											"key": "haveCuti",
+											"value": "true",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": "http://localhost:5000/users"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/users/3",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "http://localhost:5000/users/3"
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:5000/login",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"admin\",\r\n    \"password\": \"123456\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "localhost:5000/login"
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:5000/logout",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "localhost:5000/logout"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Refresh token",
+					"item": [
+						{
+							"name": "localhost:5000/refresh_tokens",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"refreshToken\": \"eodkksdowiow783783209\",\r\n    \"userId\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "localhost:5000/refresh_tokens"
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:5000/refresh_tokens?refresh_token=iwundsj817237",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/refresh_tokens?refreshToken=eodkksdowiow783783209",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"refresh_tokens"
+									],
+									"query": [
+										{
+											"key": "refreshToken",
+											"value": "eodkksdowiow783783209"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "modules",
+					"item": [
+						{
+							"name": "http://localhost:5000/modules",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5000/modules"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/modules",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Testing module\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5000/modules"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/modules/7",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5000/modules/7"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/modules/7",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"updated lagi\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5000/modules/7"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/modules/7",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "http://localhost:5000/modules/7"
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:5000/modules/query?draw=1&start=0&length=10&search=&order=asc",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/modules/query?draw=1&start=0&length=10&search=&order=asc",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"modules",
+										"query"
+									],
+									"query": [
+										{
+											"key": "draw",
+											"value": "1"
+										},
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "length",
+											"value": "10"
+										},
+										{
+											"key": "search",
+											"value": ""
+										},
+										{
+											"key": "order",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "permissions",
+					"item": [
+						{
+							"name": "http://localhost:5000/permissions",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5000/permissions"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/permissions/30",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5000/permissions/30"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/permissions",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"keyName\": \"test-permission\",\r\n    \"name\": \"Testing permission\",\r\n    \"moduleId\": 1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5000/permissions/30"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/permissions/24",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    // \"keyName\": \"test-permission\",\r\n    \"name\": \"Testing permission edit\",\r\n    \"moduleId\": 2\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5000/permissions/24"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/permissions/24",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "http://localhost:5000/permissions/24"
+							},
+							"response": []
+						},
+						{
+							"name": "localhost:5000/permissions/query?draw=1&start=3&length=10&search=&order=asc",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:5000/permissions/query?draw=1&start=3&length=10&search=&order=asc",
+									"host": [
+										"localhost"
+									],
+									"port": "5000",
+									"path": [
+										"permissions",
+										"query"
+									],
+									"query": [
+										{
+											"key": "draw",
+											"value": "1"
+										},
+										{
+											"key": "start",
+											"value": "3"
+										},
+										{
+											"key": "length",
+											"value": "10"
+										},
+										{
+											"key": "search",
+											"value": ""
+										},
+										{
+											"key": "order",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "permissions roles",
+					"item": [
+						{
+							"name": "http://localhost:5000/detach_permission",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"roleId\": 2,\r\n    \"permissionId\": 22\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5000/detach_permission"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5000/attach_permission",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"roleId\": 2,\r\n    \"permissionId\": 22\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5000/attach_permission"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "API CUTI",
+			"item": [
+				{
+					"name": "Pengajuan Cuti",
+					"item": [
+						{
+							"name": "http://localhost:5001/pengajuan-cuti",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5001/pengajuan-cuti"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5001/pengajuan-cuti/query?draw=1&start=0&length=10&search=&order=asc&status=&user_id=",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://localhost:5001/pengajuan-cuti/query?draw=1&start=0&length=10&search=&order=asc&status=&user_id=",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "5001",
+									"path": [
+										"pengajuan-cuti",
+										"query"
+									],
+									"query": [
+										{
+											"key": "draw",
+											"value": "1"
+										},
+										{
+											"key": "start",
+											"value": "0"
+										},
+										{
+											"key": "length",
+											"value": "10"
+										},
+										{
+											"key": "search",
+											"value": ""
+										},
+										{
+											"key": "order",
+											"value": "asc"
+										},
+										{
+											"key": "status",
+											"value": ""
+										},
+										{
+											"key": "user_id",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5001/pengajuan-cuti/2",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5001/pengajuan-cuti/2"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5001/pengajuan-cuti/by-user/1",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5001/pengajuan-cuti/by-user/1"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5001/pengajuan-cuti/by-jenis-cuti/5",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5001/pengajuan-cuti/by-jenis-cuti/4"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5001/pengajuan-cuti",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "userId",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "jenisCutiId",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "keterangan",
+											"value": "izin pulang kampung lebaran",
+											"type": "text"
+										},
+										{
+											"key": "tglAwal",
+											"value": "2024-06-24",
+											"type": "text"
+										},
+										{
+											"key": "tglAkhir",
+											"value": "2024-06-28",
+											"type": "text"
+										},
+										{
+											"key": "approvalCutiId",
+											"value": "3,1",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/D:/Dokumen shilki-aul/aplikasi-harmony6.png",
+											"disabled": true
+										}
+									]
+								},
+								"url": "http://localhost:5001/pengajuan-cuti"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5001/pengajuan-cuti/1",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "userId",
+											"value": "4",
+											"type": "text"
+										},
+										{
+											"key": "jenisCutiId",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "keterangan",
+											"value": "izin pulang kampung lebaran",
+											"type": "text"
+										},
+										{
+											"key": "tglAwal",
+											"value": "2024-06-21",
+											"type": "text"
+										},
+										{
+											"key": "tglAkhir",
+											"value": "2024-06-25",
+											"type": "text"
+										},
+										{
+											"key": "approvalCutiId",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "file",
+											"type": "file",
+											"src": "/D:/Dokumen shilki-aul/aplikasi-samrs.png",
+											"disabled": true
+										}
+									]
+								},
+								"url": "http://localhost:5001/pengajuan-cuti/1"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5001/pengajuan-cuti/2",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": "http://localhost:5001/pengajuan-cuti/2"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Approval Cuti",
+					"item": [
+						{
+							"name": "http://localhost:5001/approved-waiting/by-user/1",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": "http://localhost:5001/approved-waiting/by-user/1"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5001/approved-waiting/approved",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\": 1,\r\n    \"pengajuanCutiId\":2,\r\n    \"keterangan\": \"OKE\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/approved-waiting/approved"
+							},
+							"response": []
+						},
+						{
+							"name": "http://localhost:5001/approved-waiting/not-approved",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"userId\": 3,\r\n    \"pengajuanCutiId\":1,\r\n    \"keterangan\": \"tidak diizinkan\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "http://localhost:5001/approved-waiting/not-approved"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
